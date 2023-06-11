@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
         android:fontFamily="@font/jakartab"
-        android:text="DAFTAR"
+        android:text=""
         android:textColor="@color/orange"
         android:textSize="@dimen/_25sdp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -187,10 +187,11 @@
         </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <TextView
+
+    <Button
         android:id="@+id/btn_daftar"
         android:text="Daftar"
-        android:textColor="@color/white"
+        android:textColor="@color/orange"
         android:fontFamily="@font/jakartab"
         android:textSize="@dimen/_25sdp"
         android:textAlignment="center"
@@ -198,16 +199,16 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/custom_box1"
+        android:background="@drawable/custom_box3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_3"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/cl_3"/>
 
-    <TextView
+    <Button
         android:id="@+id/btn_masuk"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_35sdp"
-        android:background="@drawable/custom_box2"
+        android:background="@drawable/custom_box3"
         android:fontFamily="@font/jakartab"
         android:gravity="center_vertical"
         android:text="Masuk"
@@ -215,7 +216,7 @@
         android:textColor="@color/orange"
         android:textSize="@dimen/_16sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        app:layout_constraintTop_toTopOf="parent"/>
 
 
 

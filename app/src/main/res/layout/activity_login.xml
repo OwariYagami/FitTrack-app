@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/jakartab"
-        android:text="MASUK"
+        android:text=""
         android:textSize="@dimen/_25sdp"
         android:textColor="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
@@ -135,10 +135,10 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
+    <Button
         android:id="@+id/btn_masuk"
         android:text="Masuk"
-        android:textColor="@color/white"
+        android:textColor="@color/orange"
         android:fontFamily="@font/jakartab"
         android:textSize="@dimen/_25sdp"
         android:textAlignment="center"
@@ -146,10 +146,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/custom_box1"
+        android:background="@drawable/custom_box3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_2"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/cl_2"/>
 
     <RelativeLayout
         android:id="@+id/relativeLayout3"
@@ -188,7 +188,7 @@
             ></View>
     </RelativeLayout>
 
-    <TextView
+    <Button
         android:id="@+id/btn_register"
         android:text="Daftar"
         android:textColor="@color/orange"
@@ -199,9 +199,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/custom_box2"
+        android:background="@drawable/custom_box3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

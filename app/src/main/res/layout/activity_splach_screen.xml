@@ -75,19 +75,17 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2"></TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
+    <Button
         android:id="@+id/btn_mulai"
         android:layout_width="@dimen/_200sdp"
         android:layout_height="@dimen/_50sdp"
         android:background="@drawable/custom_box3"
         android:fontFamily="@font/jakartab"
-        android:gravity="center_vertical"
         android:text="MULAI TRACK"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/orange"
         android:textSize="@dimen/_20sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        ></TextView>
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
