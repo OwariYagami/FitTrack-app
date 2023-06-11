@@ -170,7 +170,7 @@
 
 
         <TextView
-           android:id="@+id/atau"
+            android:id="@+id/atau"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="atau"
