@@ -9,3 +9,8 @@ data class DataUser(
     val name: String,
     val email: String,
 )
+
+data class ResponseRegister(
+    val status: Boolean,
+    val message: String
+)
