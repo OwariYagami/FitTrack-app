@@ -11,6 +11,7 @@ import com.tubes.fittrack.R
 import com.tubes.fittrack.api.RetrofitClient
 import com.tubes.fittrack.api.Users
 import com.tubes.fittrack.databinding.ActivityLoginBinding
+import com.tubes.fittrack.ui.home.HomeFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

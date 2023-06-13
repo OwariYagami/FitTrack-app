@@ -16,7 +16,7 @@
         android:theme="@style/Theme.FitTrack"
         tools:targetApi="31">
         <activity
-            android:name=".auth.SplachScreenActivity"
+            android:name=".auth.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
