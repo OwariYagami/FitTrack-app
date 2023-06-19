@@ -1,5 +1,6 @@
 package com.tubes.fittrack.ui.home
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,11 +28,16 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        binding.progressbar.max=2500
+        val current=1780
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        ObjectAnimator.ofInt(binding.progressbar,"progress",current)
+            .setDuration(2000)
+            .start()
+
+
+
+
         return root
     }
 

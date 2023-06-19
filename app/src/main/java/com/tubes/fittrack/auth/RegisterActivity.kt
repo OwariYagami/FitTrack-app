@@ -1,8 +1,10 @@
 package com.tubes.fittrack.auth
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.tubes.fittrack.MainActivity
 import com.tubes.fittrack.R
 import com.tubes.fittrack.api.ResponseRegister
 import com.tubes.fittrack.api.RetrofitClient
@@ -27,6 +29,11 @@ class RegisterActivity : AppCompatActivity() {
             val KonfirmasiPassword: String = binding.etKonfirmpassword.text.toString()
             registerUser("anonim", email, password, KonfirmasiPassword)
 
+        }
+
+        binding.btnMasuk.setOnClickListener{
+            val intent = Intent(this@RegisterActivity, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
