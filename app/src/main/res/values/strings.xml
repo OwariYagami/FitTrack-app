@@ -7,7 +7,7 @@
     <string name="Pusat_Kebagaran">Pusat Kebugaran</string>
     <string name="Aktivitas">Aktivitas</string>
     <string name="Profil">Profil</string>
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_profile">profile</string>
 </resources>
