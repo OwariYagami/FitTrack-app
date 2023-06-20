@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+  android:layout_margin="@dimen/_10sdp"
+
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="@dimen/_5sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/custom_box5"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_latihan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cable Curl"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:textColor="@color/text"
+            android:textSize="@dimen/_16sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
+
+        <RelativeLayout
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_box1"
+            android:padding="@dimen/_5sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/ln1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:id="@+id/tv_rep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jakartab"
+                    android:text="6"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16sdp"></TextView>
+
+                <TextView
+                    android:id="@+id/tv_x"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tv_rep"
+                    android:fontFamily="@font/jakartab"
+                    android:text="x"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ln1"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:id="@+id/tv_set"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jakartab"
+                    android:text="4"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16sdp"></TextView>
+
+                <TextView
+                    android:id="@+id/tv_x2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tv_set"
+                    android:fontFamily="@font/jakartab"
+                    android:text="set"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp"></TextView>
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
