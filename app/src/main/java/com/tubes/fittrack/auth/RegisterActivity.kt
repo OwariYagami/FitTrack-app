@@ -24,10 +24,11 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(view)
 
         binding.btnDaftar.setOnClickListener {
+            val name: String = binding.etName.text.toString()
             val email: String = binding.etEmail.text.toString()
             val password: String = binding.etPassword.text.toString()
             val KonfirmasiPassword: String = binding.etKonfirmpassword.text.toString()
-            registerUser("anonim", email, password, KonfirmasiPassword)
+            registerUser(name, email, password, KonfirmasiPassword)
 
         }
 

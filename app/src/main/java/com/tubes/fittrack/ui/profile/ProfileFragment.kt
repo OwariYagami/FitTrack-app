@@ -6,10 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.tubes.fittrack.R
+import com.tubes.fittrack.api.ResponseUserProfile
+import com.tubes.fittrack.api.RetrofitClient
+import com.tubes.fittrack.auth.LoginActivity
 import com.tubes.fittrack.auth.RegisterActivity
 import com.tubes.fittrack.databinding.ActivityLoginBinding
 import com.tubes.fittrack.databinding.FragmentProfileBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,7 +57,64 @@ class ProfileFragment : Fragment() {
             val intent = Intent(activity, EditProfileActivity::class.java)
             startActivity(intent)
         }
+
+        val email: String = LoginActivity.email1
+        userProfil(email, binding)
+
         return root;
+    }
+
+    private fun userProfil(email: String, binding: FragmentProfileBinding){
+        RetrofitClient.instance.getUserProfil(email).enqueue(object : Callback<ResponseUserProfile>{
+            override fun onResponse(
+                call: Call<ResponseUserProfile>,
+                response: Response<ResponseUserProfile>,
+            ) {
+                if (response.isSuccessful){
+                    val responseUserProfile = response.body()
+                    val status = responseUserProfile?.status
+                    val name = responseUserProfile?.name
+                    val data = responseUserProfile?.data
+                    if (status == true){
+//                        val id: Int? = data?.id
+//                        val id_user: Int? = data?.id_user
+                        val usia: Int? = data?.usia
+//                        val kelamin: String? = data?.kelamin
+                        val b_badan: Int? = data?.b_badan
+                        val t_badan: Int? = data?.t_badan
+                        val image: String? = data?.image
+
+                        if (image != null){
+                            val imageUrl: String = "http://192.168.1.8:8000/image/$image"
+                            Glide.with(requireContext())
+                                .load(imageUrl)
+                                .apply(RequestOptions().centerCrop())
+                                .into(binding.ivProfile)
+                        }
+
+                        binding.tvName.setText(name)
+
+
+                        if (usia != null){
+                            binding.tvAge.setText("$usia Tahun")
+                        }
+
+                        if (b_badan != null){
+                            binding.tvWeight.setText("$b_badan Kg")
+                        }
+
+                        if (t_badan != null){
+                            binding.tvHeight.setText("$t_badan Cm")
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseUserProfile>, t: Throwable) {
+                Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 
 
