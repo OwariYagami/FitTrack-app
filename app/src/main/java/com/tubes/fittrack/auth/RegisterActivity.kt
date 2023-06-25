@@ -1,9 +1,11 @@
 package com.tubes.fittrack.auth
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.tubes.fittrack.MainActivity
 import com.tubes.fittrack.R
 import com.tubes.fittrack.api.ResponseRegister
@@ -44,6 +46,12 @@ class RegisterActivity : AppCompatActivity() {
         password: String,
         KonfirmasiPassword: String
     ){
+        val pDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+        pDialog.progressHelper.barColor = Color.parseColor("#A5DC86")
+        pDialog.titleText = "Loading"
+        pDialog.setCancelable(false)
+        pDialog.show()
+
         RetrofitClient.instance.register(
             name,
             email,
@@ -60,14 +68,23 @@ class RegisterActivity : AppCompatActivity() {
                     val message = registerResponse?.message
 
                     if (status == true){
-                        Toast.makeText(this@RegisterActivity, message, Toast.LENGTH_SHORT).show()
+                        pDialog.dismiss()
+                        SweetAlertDialog(this@RegisterActivity, SweetAlertDialog.SUCCESS_TYPE)
+                            .setTitleText("$message")
+                            .setContentText("silahkan login")
+                            .show()
                     } else {
-                        Toast.makeText(this@RegisterActivity, message, Toast.LENGTH_SHORT).show()
+                        pDialog.dismiss()
+                        SweetAlertDialog(this@RegisterActivity, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Oops...")
+                            .setContentText("$message")
+                            .show()
                     }
                 }
             }
 
             override fun onFailure(call: Call<ResponseRegister>, t: Throwable) {
+                pDialog.dismiss()
                 Toast.makeText(this@RegisterActivity, t.message, Toast.LENGTH_SHORT).show()
             }
 

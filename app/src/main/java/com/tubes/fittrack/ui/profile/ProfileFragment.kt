@@ -1,12 +1,14 @@
 package com.tubes.fittrack.ui.profile
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.tubes.fittrack.R
@@ -65,6 +67,11 @@ class ProfileFragment : Fragment() {
     }
 
     private fun userProfil(email: String, binding: FragmentProfileBinding){
+        val pDialog = SweetAlertDialog(requireContext(), SweetAlertDialog.PROGRESS_TYPE)
+        pDialog.progressHelper.barColor = Color.parseColor("#A5DC86")
+        pDialog.titleText = "Loading Profil"
+        pDialog.setCancelable(false)
+        pDialog.show()
         RetrofitClient.instance.getUserProfil(email).enqueue(object : Callback<ResponseUserProfile>{
             override fun onResponse(
                 call: Call<ResponseUserProfile>,
@@ -108,9 +115,11 @@ class ProfileFragment : Fragment() {
                         }
                     }
                 }
+                pDialog.dismiss()
             }
 
             override fun onFailure(call: Call<ResponseUserProfile>, t: Throwable) {
+                pDialog.dismiss()
                 Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
             }
 

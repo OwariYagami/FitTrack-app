@@ -3,11 +3,13 @@ package com.tubes.fittrack.ui.profile
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.OpenableColumns
 import android.widget.Toast
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.tubes.fittrack.api.ResponseUpdateProfil
@@ -66,6 +68,11 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     private fun userProfil(email: String){
+        val pDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+        pDialog.progressHelper.barColor = Color.parseColor("#A5DC86")
+        pDialog.titleText = "Loading Profil"
+        pDialog.setCancelable(false)
+        pDialog.show()
         RetrofitClient.instance.getUserProfil(email).enqueue(object : Callback<ResponseUserProfile>{
             override fun onResponse(
                 call: Call<ResponseUserProfile>,
@@ -109,9 +116,11 @@ class EditProfileActivity : AppCompatActivity() {
                         }
                     }
                 }
+                pDialog.dismiss()
             }
 
             override fun onFailure(call: Call<ResponseUserProfile>, t: Throwable) {
+                pDialog.dismiss()
                 Toast.makeText(this@EditProfileActivity, t.message, Toast.LENGTH_SHORT).show()
             }
 
