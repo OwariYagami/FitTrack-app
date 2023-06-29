@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/_5sdp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:fontFamily="@font/jakartab"
+        android:textColor="@color/br_text"
+        android:textSize="@dimen/_14sdp"
+        android:id="@+id/tv_nama_latihan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Running"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jakartab"
+        android:text="Durasi : "
+        android:textColor="@color/br_text"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nama_latihan"></TextView>
+
+    <TextView
+        android:id="@+id/tv_durasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jakartab"
+        android:text="200"
+        android:textColor="@color/br_hint"
+        android:textSize="@dimen/_12sdp"
+
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nama_latihan"></TextView>
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jakartab"
+        android:text="Kalori Terbakar : "
+        android:textColor="@color/br_text"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_durasi"></TextView>
+
+    <TextView
+        android:id="@+id/tv_kaloribkr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jakartab"
+        android:text="100"
+        android:textColor="@color/br_hint"
+        android:textSize="@dimen/_12sdp"
+
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/tv_durasi"></TextView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

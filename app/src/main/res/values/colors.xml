@@ -11,8 +11,17 @@
     <color name="orange">#F76707</color>
     <color name="bg_app">#F8F9FA</color>
     <color name="text">#632903</color>
+    <color name="br_text">#943e04</color>
     <color name="yellow">#FAB005</color>
     <color name="green">#0CA578</color>
     <color name="red">#FA5252</color>
     <color name="gr_text">#076448</color>
+    <color name="gr_button">#0CA678</color>
+    <color name="gr_back">#CED4DA</color>
+    <color name="br_hint">#fab005</color>
+    <color name="br_tint">#ffc078</color>
+
+    <color name="br_primary">#f76707</color>
+    <color name="gr_hint">#96f2d7</color>
+    <color name="gr_primary">#0ca678</color>
 </resources>

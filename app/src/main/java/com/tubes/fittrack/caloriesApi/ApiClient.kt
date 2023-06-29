@@ -1,5 +1,7 @@
-package com.tubes.fittrack.ninjasApi
+package com.tubes.fittrack.caloriesApi
 
+
+import com.tubes.fittrack.api.RetrofitClient
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -11,10 +13,7 @@ object ApiClient {
         val httpClient = OkHttpClient.Builder()
             .addInterceptor { chain ->
                 val request = chain.request().newBuilder()
-                    .addHeader(
-                        "X-Api-Key",
-                        API_KEY
-                    ) // Tambahkan header Authorization dengan API key
+                    .addHeader("X-Api-Key", API_KEY) // Tambahkan header Authorization dengan API key
                     .build()
                 chain.proceed(request)
             }
@@ -22,8 +21,7 @@ object ApiClient {
 
         httpClient
     }
-
-        private val retrofit: Retrofit by lazy {
+    private val retrofit: Retrofit by lazy {
 
 
         Retrofit.Builder()
@@ -36,14 +34,4 @@ object ApiClient {
     val apiService: ApiService by lazy {
         retrofit.create(ApiService::class.java)
     }
-
-    val retrofit2 = Retrofit.Builder()
-        .baseUrl("https://api.api-ninjas.com/v1/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-    val apiService2: ApiService by lazy {
-        retrofit.create(ApiService::class.java)
-    }
-
-
 }

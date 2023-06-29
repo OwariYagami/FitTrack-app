@@ -129,6 +129,7 @@
                 </androidx.recyclerview.widget.RecyclerView>
 
                 <TextView
+                    android:id="@+id/btnTmbhMakanan"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:background="@drawable/custom_box7"

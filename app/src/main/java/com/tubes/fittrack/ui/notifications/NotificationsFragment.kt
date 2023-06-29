@@ -32,6 +32,10 @@ class NotificationsFragment : Fragment() {
             val intent=Intent(activity,LatihanActivity::class.java)
             startActivity(intent)
         }
+        binding.btnTmbhMakanan.setOnClickListener {
+            val intent=Intent(activity,MakananActivity::class.java)
+            startActivity(intent)
+        }
         return root
     }
 
