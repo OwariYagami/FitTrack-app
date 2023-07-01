@@ -43,4 +43,7 @@ interface ApiService {
         @Part("b_badan") b_badan: RequestBody,
         @Part("t_badan") t_badan: RequestBody
     ): Call<ResponseUpdateProfil>
+
+    @GET("location")
+    fun getLocation(): Call<ResponseLocation>
 }
