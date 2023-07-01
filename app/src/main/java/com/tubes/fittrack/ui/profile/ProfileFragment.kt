@@ -92,7 +92,7 @@ class ProfileFragment : Fragment() {
                         val image: String? = data?.image
 
                         if (image != null){
-                            val imageUrl: String = "http://192.168.1.8:8000/image/$image"
+                            val imageUrl: String = RetrofitClient.IMAGE_URL + image
                             Glide.with(requireContext())
                                 .load(imageUrl)
                                 .apply(RequestOptions().centerCrop())
