@@ -14,3 +14,8 @@ data class ResponseRegister(
     val status: Boolean,
     val message: String
 )
+
+data class ResponseTambahMakanan(
+    val status: Boolean,
+    val message: String
+)

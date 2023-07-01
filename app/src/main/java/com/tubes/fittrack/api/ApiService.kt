@@ -46,4 +46,22 @@ interface ApiService {
 
     @GET("location")
     fun getLocation(): Call<ResponseLocation>
+
+    @FormUrlEncoded
+    @POST("tanggal/makanan/{email}")
+    fun tambahMakanan(
+        @Path("email") email: String,
+        @Field("name") name: String,
+        @Field("takaran") takaran: String,
+        @Field("kalori") kalori: String
+    ): Call<ResponseTambahMakanan>
+
+    @FormUrlEncoded
+    @POST("tanggal/aktivitas/{email}")
+    fun tambahLatihan(
+        @Path("email") email: String,
+        @Field("name") name: String,
+        @Field("durasi") takaran: String,
+        @Field("kalori") kalori: String
+    ): Call<ResponseTambahMakanan>
 }
