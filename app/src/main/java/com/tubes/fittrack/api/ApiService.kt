@@ -41,7 +41,8 @@ interface ApiService {
         @Part("usia") usia: RequestBody,
         @Part("kelamin") kelamin: RequestBody,
         @Part("b_badan") b_badan: RequestBody,
-        @Part("t_badan") t_badan: RequestBody
+        @Part("t_badan") t_badan: RequestBody,
+        @Part("kalori") kalori: RequestBody
     ): Call<ResponseUpdateProfil>
 
     @GET("location")
@@ -64,4 +65,11 @@ interface ApiService {
         @Field("durasi") takaran: String,
         @Field("kalori") kalori: String
     ): Call<ResponseTambahMakanan>
+
+    @GET("all/aktivitas/sekarang/{email}")
+    fun getDataMakananAktivitas(@Path("email") email: String): Call<ResponseMakananAktivitas>
+
+    @GET("all/aktivitas/kemarin/{email}")
+    fun getDatakemarin(@Path("email") email: String): Call<ResponseMakananAktivitas>
+
 }

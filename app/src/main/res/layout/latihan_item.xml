@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-  android:layout_margin="@dimen/_10sdp"
+  android:padding="@dimen/_5sdp"
 
     >
 
@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="@dimen/_5sdp"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/custom_box5"
+        android:background="@drawable/custom_box10"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -32,7 +32,7 @@
         <RelativeLayout
             android:layout_width="@dimen/_70sdp"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_box1"
+            android:background="@drawable/custom_box11"
             android:padding="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,46 +49,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/jakartab"
-                    android:text="6"
+                    android:text="20"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_16sdp"></TextView>
 
                 <TextView
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:id="@+id/tv_x"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/tv_rep"
                     android:fontFamily="@font/jakartab"
-                    android:text="x"
+                    android:text="min"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12sdp"></TextView>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ln1"
-                android:layout_centerHorizontal="true">
 
-                <TextView
-                    android:id="@+id/tv_set"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/jakartab"
-                    android:text="4"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_16sdp"></TextView>
-
-                <TextView
-                    android:id="@+id/tv_x2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/tv_set"
-                    android:fontFamily="@font/jakartab"
-                    android:text="set"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"></TextView>
-            </LinearLayout>
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

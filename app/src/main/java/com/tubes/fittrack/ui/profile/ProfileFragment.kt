@@ -1,5 +1,6 @@
 package com.tubes.fittrack.ui.profile
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -60,8 +61,10 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
 
-        val email: String = LoginActivity.email1
-        userProfil(email, binding)
+        val sharedPreferences = context?.getSharedPreferences("userPref", Context.MODE_PRIVATE)
+
+        val email: String? = sharedPreferences?.getString("email","")
+        userProfil(email!!, binding)
 
         return root;
     }

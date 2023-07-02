@@ -1,13 +1,19 @@
 package com.tubes.fittrack.ui.profile
 
+import android.R
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.OpenableColumns
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bumptech.glide.Glide
@@ -33,15 +39,55 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     private var imageFile: File? = null
-
+    private val spinnerItems = arrayOf("Menaikkan Berat Badan", "Menurunkan Berat Badan", "Menjaga Berat Badan")
+    private val spinnerItems2 = arrayOf("Light", "Moderate", "Heavy")
+    private lateinit var selecttujuan: String
+    private lateinit var selectintensitas: String
     lateinit var binding: ActivityEditProfileBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_edit_profile)
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val spinner:Spinner=binding.spinnerTujuan
+        val adapter = ArrayAdapter(this, R.layout.simple_spinner_item, spinnerItems)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
 
-        userProfil(LoginActivity.email1)
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                 selecttujuan = parent.getItemAtPosition(position).toString()
+                Toast.makeText(applicationContext, "Selected item: $selecttujuan", Toast.LENGTH_SHORT).show()
+            }
+
+
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Do nothing
+            }
+        }
+
+        val spinner2:Spinner=binding.spinnerIntensitas
+        val adapter2 = ArrayAdapter(this, R.layout.simple_spinner_item, spinnerItems2)
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner2.adapter = adapter2
+
+        spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                selectintensitas = parent.getItemAtPosition(position).toString()
+                Toast.makeText(applicationContext, "Selected item: $selectintensitas", Toast.LENGTH_SHORT).show()
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Do nothing
+            }
+        }
+        binding.btnHitung.setOnClickListener {
+            hitungKalori(selecttujuan,selectintensitas)
+        }
+        val sharedPreferences = getSharedPreferences("userPref", Context.MODE_PRIVATE)
+
+        val email: String? = sharedPreferences?.getString("email","")
+        userProfil(email!!)
 
         binding.ivProfile.setOnClickListener {
             pickImageFromGallery()
@@ -53,11 +99,76 @@ class EditProfileActivity : AppCompatActivity() {
             val usia: String = binding.etUsia.text.toString()
             val bBadan: String = binding.etBeratBadan.text.toString()
             val tBadan: String = binding.etTinggiBadan.text.toString()
-
-            uploadPorfileData(email, imageFile, name, usia, "Pria", bBadan, tBadan)
+            val kalori: String = binding.etKaloriHarian.text.toString()
+            uploadPorfileData(email, imageFile, name, usia, "Pria", bBadan, tBadan,kalori)
         }
     }
+    private fun hitungKalori(tujuan:String,intensitas:String){
+        if(tujuan=="Menaikkan Berat Badan" && intensitas=="Light"){
+           val input= binding.etBeratBadan.text.toString()
+            val bb=input.toInt()
+            val intensitas=1.55
+            val kalori_harian=((bb * 24) * intensitas) + 100
+            binding.etKaloriHarian.text=kalori_harian.toString()
 
+        }else if(tujuan=="Menaikkan Berat Badan" && intensitas=="Moderate"){
+            val input= binding.etBeratBadan.text.toString()
+            val bb=input.toInt()
+            val intensitas=1.65
+            val kalori_harian=((bb * 24) * intensitas) + 100
+            binding.etKaloriHarian.text=kalori_harian.toString()
+
+        }else if(tujuan=="Menaikkan Berat Badan" && intensitas=="Heavy"){
+            val input= binding.etBeratBadan.text.toString()
+            val bb=input.toInt()
+            val intensitas=1.8
+            val kalori_harian=((bb * 24) * intensitas) + 100
+            binding.etKaloriHarian.text=kalori_harian.toString()
+
+        }else  if(tujuan=="Menurunkan Berat Badan" && intensitas=="Light"){
+            val input= binding.etBeratBadan.text.toString()
+            val bb=input.toInt()
+            val intensitas=1.55
+            val kalori_harian=((bb * 24) * intensitas) - 100
+            binding.etKaloriHarian.text=kalori_harian.toString()
+
+        }else if(tujuan=="Menurunkan Berat Badan" && intensitas=="Moderate"){
+            val input= binding.etBeratBadan.text.toString()
+            val bb=input.toInt()
+            val intensitas=1.65
+            val kalori_harian=((bb * 24) * intensitas) - 100
+            binding.etKaloriHarian.text=kalori_harian.toString()
+
+        }else if(tujuan=="Menurunkan Berat Badan" && intensitas=="Heavy"){
+            val input= binding.etBeratBadan.text.toString()
+            val bb=input.toInt()
+            val intensitas=1.8
+            val kalori_harian=((bb * 24) * intensitas) - 100
+            binding.etKaloriHarian.text=kalori_harian.toString()
+
+        }else if(tujuan=="Menjaga Berat Badan" && intensitas=="Light"){
+            val input= binding.etBeratBadan.text.toString()
+            val bb=input.toInt()
+            val intensitas=1.55
+            val kalori_harian=((bb * 24) * intensitas)
+            binding.etKaloriHarian.text=kalori_harian.toString()
+
+        }else if(tujuan=="Menjaga Berat Badan" && intensitas=="Moderate"){
+            val input= binding.etBeratBadan.text.toString()
+            val bb=input.toInt()
+            val intensitas=1.55
+            val kalori_harian=((bb * 24) * intensitas)
+            binding.etKaloriHarian.text=kalori_harian.toString()
+
+        }else if(tujuan=="Menjaga Berat Badan" && intensitas=="Heavy"){
+            val input= binding.etBeratBadan.text.toString()
+            val bb=input.toInt()
+            val intensitas=1.8
+            val kalori_harian=((bb * 24) * intensitas)
+            binding.etKaloriHarian.text=kalori_harian.toString()
+
+        }
+    }
     private fun pickImageFromGallery(){
         // Membuat intent untuk memilih gambar dari galeri
         val intent = Intent(Intent.ACTION_PICK)
@@ -134,7 +245,8 @@ class EditProfileActivity : AppCompatActivity() {
         usia: String,
         kelamin: String,
         b_badan: String,
-        t_badan: String
+        t_badan: String,
+        kalori: String
     ){
         if (imageFile != null && imageFile.exists()){
             // Buat RequestBody untuk file gambar
@@ -147,14 +259,15 @@ class EditProfileActivity : AppCompatActivity() {
             val kelaminBody: RequestBody = RequestBody.create(MediaType.parse("text/plain"), kelamin)
             val b_badanBody: RequestBody = RequestBody.create(MediaType.parse("text/plain"), b_badan)
             val t_badanBody: RequestBody = RequestBody.create(MediaType.parse("text/plain"), t_badan)
-
+            val k_kalori: RequestBody = RequestBody.create(MediaType.parse("text/plain"), kalori)
             RetrofitClient.instance.uploadProfile(email,
                 imagePart,
                 nameBody,
                 usiaBody,
                 kelaminBody,
                 b_badanBody,
-                t_badanBody
+                t_badanBody,
+                k_kalori
             ).enqueue(object : Callback<ResponseUpdateProfil>{
                 override fun onResponse(
                     call: Call<ResponseUpdateProfil>,
@@ -181,14 +294,15 @@ class EditProfileActivity : AppCompatActivity() {
             val kelaminBody: RequestBody = RequestBody.create(MediaType.parse("text/plain"), kelamin)
             val b_badanBody: RequestBody = RequestBody.create(MediaType.parse("text/plain"), b_badan)
             val t_badanBody: RequestBody = RequestBody.create(MediaType.parse("text/plain"), t_badan)
-
+            val k_kalori: RequestBody = RequestBody.create(MediaType.parse("text/plain"), kalori)
             RetrofitClient.instance.uploadProfile(email,
                 null,
                 nameBody,
                 usiaBody,
                 kelaminBody,
                 b_badanBody,
-                t_badanBody
+                t_badanBody,
+                k_kalori
             ).enqueue(object : Callback<ResponseUpdateProfil>{
                 override fun onResponse(
                     call: Call<ResponseUpdateProfil>,

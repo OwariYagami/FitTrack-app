@@ -1,5 +1,6 @@
 package com.tubes.fittrack.ui.notifications
 
+import android.content.Context
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -75,11 +76,13 @@ class MakananActivity : AppCompatActivity() {
                 })
         }
         binding.btnSimpan.setOnClickListener {
-            val email: String = LoginActivity.email1
+            val sharedPreferences =getSharedPreferences("userPref", Context.MODE_PRIVATE)
+
+            val email: String? = sharedPreferences?.getString("email","")
             val makanan: String = binding.listMakanan.text.toString()
             val takaran: String = binding.etTakaran.text.toString()
             val kalori: String = binding.etKalori.text.toString()
-            postMakanan(email,makanan,takaran,kalori)
+            postMakanan(email!!,makanan,takaran,kalori)
             Toast.makeText(this@MakananActivity, "Save :"+binding.listMakanan.text.toString()+" ,"+binding.etKalori.text.toString()
                 +" , "+binding.etTakaran.text.toString(), Toast.LENGTH_SHORT).show()
         }

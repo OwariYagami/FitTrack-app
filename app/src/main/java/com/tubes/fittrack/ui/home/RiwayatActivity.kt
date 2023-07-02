@@ -1,82 +1,54 @@
-package com.tubes.fittrack.ui.notifications
+package com.tubes.fittrack.ui.home
 
 import android.content.Context
-import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.tubes.fittrack.R
 import com.tubes.fittrack.api.ResponseMakananAktivitas
 import com.tubes.fittrack.api.RetrofitClient
 import com.tubes.fittrack.auth.LoginActivity
-import com.tubes.fittrack.databinding.FragmentNotificationsBinding
+import com.tubes.fittrack.databinding.ActivityRiwayatBinding
+import com.tubes.fittrack.ui.notifications.AktivitasAdapter
+import com.tubes.fittrack.ui.notifications.MakananAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class NotificationsFragment : Fragment() {
-
-    private var _binding: FragmentNotificationsBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+class RiwayatActivity : AppCompatActivity() {
+    private lateinit var binding:ActivityRiwayatBinding
     private lateinit var makananAdapter: MakananAdapter
     private lateinit var makananRecyclerView: RecyclerView
 
     private lateinit var aktivitasAdapter: AktivitasAdapter
     private lateinit var aktivitasRecyclerView: RecyclerView
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        binding.btnTmbhLatihan.setOnClickListener {
-            val intent=Intent(activity,LatihanActivity::class.java)
-            startActivity(intent)
-        }
-        binding.btnTmbhMakanan.setOnClickListener {
-            val intent=Intent(activity,MakananActivity::class.java)
-            startActivity(intent)
-        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding=ActivityRiwayatBinding.inflate(layoutInflater)
+        val view=binding.root
+        setContentView(view)
         //Data Makanan
         makananRecyclerView=binding.recycler2
-        makananRecyclerView.layoutManager=LinearLayoutManager(requireContext())
+        makananRecyclerView.layoutManager= LinearLayoutManager(this@RiwayatActivity)
         makananAdapter= MakananAdapter()
         makananRecyclerView.adapter=makananAdapter
 
         //Data Aktivitas
         aktivitasRecyclerView=binding.recycler1
-        aktivitasRecyclerView.layoutManager=LinearLayoutManager(requireContext())
+        aktivitasRecyclerView.layoutManager= LinearLayoutManager(this@RiwayatActivity)
         aktivitasAdapter= AktivitasAdapter()
         aktivitasRecyclerView.adapter=aktivitasAdapter
-        val sharedPreferences = context?.getSharedPreferences("userPref", Context.MODE_PRIVATE)
+        val sharedPreferences =getSharedPreferences("userPref", Context.MODE_PRIVATE)
 
         val email: String? = sharedPreferences?.getString("email","")
         getMakananAktivitas(email!!)
-
-
-        return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
    private fun getMakananAktivitas(email:String){
-        RetrofitClient.instance.getDataMakananAktivitas(email).enqueue(object : Callback<ResponseMakananAktivitas>{
+        RetrofitClient.instance.getDatakemarin(email).enqueue(object :
+            Callback<ResponseMakananAktivitas> {
             override fun onResponse(
                 call: Call<ResponseMakananAktivitas>,
                 response: Response<ResponseMakananAktivitas>,
@@ -89,17 +61,14 @@ class NotificationsFragment : Fragment() {
                             val data=responseMakananAktivitas.data
                             val makananList=data.makanan
                             val aktivitasList=data.aktivitas
-                            if(aktivitasList!=null){
-                                aktivitasAdapter.setData(aktivitasList)
-                            }else{
-                                Toast.makeText(requireContext(), "Data Tidak ditemukan", Toast.LENGTH_SHORT).show()
+                            val tanggal=data.tanggal
+                            binding.tvTanggal.text=tanggal.toString()
 
-                            }
-
+                            aktivitasAdapter.setData(aktivitasList)
                             makananAdapter.setData(makananList)
                         }
                     }else{
-                        Toast.makeText(requireContext(), "Data Tidak ditemukan", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@RiwayatActivity, "Data Tidak ditemukan", Toast.LENGTH_SHORT).show()
                     }
 
                 }else{

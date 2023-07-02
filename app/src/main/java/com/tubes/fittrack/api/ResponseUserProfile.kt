@@ -13,5 +13,6 @@ data class Data(
     val kelamin: String?,
     val b_badan: Int?,
     val t_badan: Int?,
+    val kalori: Int?,
     val image: String?
 )

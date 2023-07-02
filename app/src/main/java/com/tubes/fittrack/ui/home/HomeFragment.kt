@@ -1,6 +1,8 @@
 package com.tubes.fittrack.ui.home
 
 import android.animation.ObjectAnimator
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,11 +15,14 @@ import androidx.lifecycle.ViewModelProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.tubes.fittrack.api.Food
+import com.tubes.fittrack.api.ResponseMakananAktivitas
 import com.tubes.fittrack.api.ResponseUserProfile
 import com.tubes.fittrack.api.RetrofitClient
 import com.tubes.fittrack.auth.LoginActivity
 import com.tubes.fittrack.databinding.FragmentHomeBinding
 import com.tubes.fittrack.databinding.FragmentProfileBinding
+import com.tubes.fittrack.ui.notifications.MakananActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,6 +30,8 @@ import retrofit2.Response
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
+    private var user_kalori: Int? = 0
+    private var current_kalori: Float? = 0f
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -33,29 +40,89 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        binding.progressbar.max=2500
-        val current=1780
+        val sharedPreferences = context?.getSharedPreferences("userPref", Context.MODE_PRIVATE)
 
-        ObjectAnimator.ofInt(binding.progressbar,"progress",current)
+        val email: String? = sharedPreferences?.getString("email", "")
+        getMakananAktivitas(email!!)
+        binding.progressbar.max = user_kalori!!
+
+
+        val current = current_kalori!!.toInt()
+        binding.tvCurrentCal.text=current_kalori.toString()
+        ObjectAnimator.ofInt(binding.progressbar, "progress", current!!)
             .setDuration(2000)
             .start()
-        val email: String = LoginActivity.email1
-        userProfil(email, _binding!!)
 
+        userProfil(email!!, _binding!!)
+        binding.tvLihatRiwayat.setOnClickListener {
+            val intent = Intent(activity, RiwayatActivity::class.java)
+            startActivity(intent)
+        }
 
 
 
         return root
     }
 
-    private fun userProfil(email: String, binding: FragmentHomeBinding){
+    private fun getMakananAktivitas(email: String) {
+        RetrofitClient.instance.getDataMakananAktivitas(email)
+            .enqueue(object : Callback<ResponseMakananAktivitas> {
+                override fun onResponse(
+                    call: Call<ResponseMakananAktivitas>,
+                    response: Response<ResponseMakananAktivitas>,
+                ) {
+                    if (response.isSuccessful) {
+                        val responseMakananAktivitas = response.body()
+                        val status = responseMakananAktivitas?.status
+                        if (status == true) {
+                            if (responseMakananAktivitas != null) {
+                                val data = responseMakananAktivitas.data
+                                val makananList = data.makanan
+                                val aktivitasList = data.aktivitas
+                                val totalKalori = calculateTotalKalori(makananList)
+                                current_kalori = totalKalori
+                            }
+                        } else {
+                            Toast.makeText(
+                                requireContext(),
+                                "Data Tidak ditemukan",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+                    } else {
+                        val errorBody = response.errorBody()
+                        if (errorBody != null) {
+                            val errorMessage = errorBody.string()
+                            println("Error: $errorMessage")
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseMakananAktivitas>, t: Throwable) {
+                    println("Failure: ${t.message}")
+                }
+
+            })
+    }
+
+    private fun calculateTotalKalori(makananList: List<Food>): Float {
+        var totalKalori = 0f
+        for (makanan in makananList) {
+            val kalori = makanan.kalori.toFloat()
+            totalKalori += kalori
+        }
+        return totalKalori
+    }
+
+    private fun userProfil(email: String, binding: FragmentHomeBinding) {
         val pDialog = SweetAlertDialog(requireContext(), SweetAlertDialog.PROGRESS_TYPE)
         pDialog.progressHelper.barColor = Color.parseColor("#A5DC86")
         pDialog.titleText = "Loading Profil"
@@ -67,37 +134,42 @@ class HomeFragment : Fragment() {
                 call: Call<ResponseUserProfile>,
                 response: Response<ResponseUserProfile>,
             ) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     val responseUserProfile = response.body()
                     val status = responseUserProfile?.status
                     val name = responseUserProfile?.name
                     val data = responseUserProfile?.data
-                    if (status == true){
+                    if (status == true) {
                         val kelamin: String? = data?.kelamin
                         val b_badan: Int? = data?.b_badan
                         val t_badan: Int? = data?.t_badan
+                        user_kalori = data?.kalori
 
                         binding.tvWelcome.setText("Selamat Datang, $name")
-
-                        if (b_badan != null){
+                        if (user_kalori != null) {
+                            binding.tvTargetCal.text = "/" + user_kalori.toString()
+                        } else {
+                            binding.tvTargetCal.text = "/--"
+                        }
+                        if (b_badan != null) {
                             binding.tvWeight.setText(b_badan.toString())
                         } else {
                             binding.tvWeight.setText("--")
                         }
 
-                        if (t_badan != null){
+                        if (t_badan != null) {
                             binding.tvHeight.setText(t_badan.toString())
                         } else {
                             binding.tvHeight.setText("--")
                         }
 
-                        binding.tvGender.text = if (kelamin != null){
+                        binding.tvGender.text = if (kelamin != null) {
                             kelamin.toString()
                         } else {
                             "--"
                         }
 
-                        if (b_badan != null && t_badan != null){
+                        if (b_badan != null && t_badan != null) {
                             val imt = calculateBMI(b_badan.toDouble(), t_badan.toDouble())
                             binding.tvImt.setText(String.format("%.1f", imt))
                             binding.tvCategory.setText(interpretasiBMI(imt))

@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         // Cek apakah fragment saat ini adalah fragment Home
         if (currentFragment?.id == R.id.navigation_home) {
+
             // Jika fragment saat ini adalah fragment Home, panggil metode logout dan pindah ke halaman login
             SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Are you sure?")
@@ -69,9 +70,10 @@ class MainActivity : AppCompatActivity() {
         // Lakukan tindakan logout di sini, seperti membersihkan data login
 
         // Contoh: Membersihkan status login di SharedPreferences
-        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("userPref", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putBoolean("isLoggedIn", false)
+        editor.putString("email","")
         editor.apply()
 
         // Pindah ke halaman login
@@ -101,7 +103,7 @@ class MainActivity : AppCompatActivity() {
 //
     override fun onStop() {
         super.onStop()
-        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("userPref", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putBoolean("isLoggedIn", false)
         editor.apply()

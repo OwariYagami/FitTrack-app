@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-  android:layout_margin="@dimen/_10sdp"
+    android:padding="@dimen/_5sdp"
 
     >
 
@@ -14,14 +14,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="@dimen/_5sdp"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/custom_box6"
+        android:background="@drawable/custom_box9"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tv_asupan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cable Curl"
+            android:text="Milk"
             android:layout_marginLeft="@dimen/_10sdp"
             android:textColor="@color/gr_text"
             android:textSize="@dimen/_16sdp"

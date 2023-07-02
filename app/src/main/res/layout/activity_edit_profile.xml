@@ -40,171 +40,248 @@
             android:textSize="@dimen/_15sdp"></TextView>
     </androidx.appcompat.widget.Toolbar>
 
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:padding="@dimen/_16sdp"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_profile"
-            android:layout_width="146dp"
-            android:layout_height="129dp"
-            android:src="@drawable/profil"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></de.hdodenhof.circleimageview.CircleImageView>
-
-        <ImageView
-            android:id="@+id/btn_edit"
-            android:layout_width="45dp"
-            android:layout_height="44dp"
-
-            android:src="@drawable/custom_frame9"
-            app:layout_constraintBottom_toTopOf="@+id/tv_title2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.64"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.841">
-
-        </ImageView>
-
-        <EditText
-            android:id="@+id/et_name"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="1.0">
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:background="@drawable/custom_box4"
-            android:fontFamily="@font/nunito_sans"
-            android:hint="Username"
-            android:padding="@dimen/_5sdp"
-            android:textColorHint="#6A25262D"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title2"></EditText>
+            android:layout_height="wrap_content">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:padding="@dimen/_16sdp"
+                >
 
-        <TextView
-            android:id="@+id/tv_title3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/jakartab"
-            android:text="Usia"
-            android:textColor="@color/text"
-            android:textSize="@dimen/_15sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.098"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_name"></TextView>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_profile"
+                    android:layout_width="146dp"
+                    android:layout_height="129dp"
+                    android:src="@drawable/profil"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></de.hdodenhof.circleimageview.CircleImageView>
 
-        <EditText
-            android:id="@+id/et_BeratBadan"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:background="@drawable/custom_box4"
-            android:fontFamily="@font/nunito_sans"
-            android:hint="Berat Badan"
-            android:inputType="number"
-            android:padding="@dimen/_5sdp"
-            android:textColorHint="#6A25262D"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.424"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title4"></EditText>
+                <ImageView
+                    android:id="@+id/btn_edit"
+                    android:layout_width="45dp"
+                    android:layout_height="44dp"
 
-        <TextView
-            android:id="@+id/tv_title5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/jakartab"
-            android:text="Tinggi Badan"
-            android:textColor="@color/text"
-            android:textSize="@dimen/_15sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.128"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_BeratBadan"></TextView>
+                    android:src="@drawable/custom_frame9"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_title2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.64"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.841">
 
-        <TextView
-            android:id="@+id/btn_simpan"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:background="@drawable/custom_card3"
-            android:fontFamily="@font/jakartab"
-            android:text="Simpan"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_24sdp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_TinggiBadan"
-            app:layout_constraintVertical_bias="0.484" />
+                </ImageView>
 
-        <TextView
-            android:id="@+id/tv_title4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/jakartab"
-            android:text="Berat Badan"
-            android:textColor="@color/text"
-            android:textSize="@dimen/_15sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.125"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_usia"></TextView>
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/custom_box4"
+                    android:fontFamily="@font/nunito_sans"
+                    android:hint="Username"
+                    android:padding="@dimen/_5sdp"
+                    android:textColorHint="#6A25262D"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title2"></EditText>
 
-        <EditText
-            android:id="@+id/et_usia"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:background="@drawable/custom_box4"
-            android:fontFamily="@font/nunito_sans"
-            android:inputType="number"
-            android:hint="Usia"
-            android:padding="@dimen/_5sdp"
-            android:textColorHint="#6A25262D"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.424"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title3"></EditText>
+                <TextView
+                    android:id="@+id/tv_title3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jakartab"
+                    android:text="Usia"
+                    android:textColor="@color/text"
+                    android:textSize="@dimen/_15sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.098"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_name"></TextView>
 
-        <EditText
-            android:id="@+id/et_TinggiBadan"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/custom_box4"
-            android:fontFamily="@font/nunito_sans"
-            android:inputType="number"
-            android:hint="Tinggi Badan"
-            android:padding="@dimen/_5sdp"
-            android:textColorHint="#6A25262D"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.424"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title5"></EditText>
+                <EditText
+                    android:id="@+id/et_BeratBadan"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/custom_box4"
+                    android:fontFamily="@font/nunito_sans"
+                    android:hint="Berat Badan"
+                    android:inputType="number"
+                    android:padding="@dimen/_5sdp"
+                    android:textColorHint="#6A25262D"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.424"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title4"></EditText>
 
-        <TextView
-            android:id="@+id/tv_title2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/jakartab"
-            android:text="Nama"
-            android:textColor="@color/text"
-            android:textSize="@dimen/_15sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.104"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_profile"></TextView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tv_title5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jakartab"
+                    android:text="Tinggi Badan"
+                    android:textColor="@color/text"
+                    android:textSize="@dimen/_15sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.128"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_BeratBadan"></TextView>
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:textAllCaps="false"
+                    android:id="@+id/btn_simpan"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/custom_card3"
+                    android:fontFamily="@font/jakartab"
+                    android:text="Simpan"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_24sdp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_kalori_harian"
+                    app:layout_constraintVertical_bias="0.484" />
+
+                <TextView
+                    android:id="@+id/tv_title4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jakartab"
+                    android:text="Berat Badan"
+                    android:textColor="@color/text"
+                    android:textSize="@dimen/_15sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.125"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_usia"></TextView>
+
+                <EditText
+                    android:id="@+id/et_usia"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/custom_box4"
+                    android:fontFamily="@font/nunito_sans"
+                    android:inputType="number"
+                    android:hint="Usia"
+                    android:padding="@dimen/_5sdp"
+                    android:textColorHint="#6A25262D"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.424"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title3"></EditText>
+
+                <EditText
+                    android:id="@+id/et_TinggiBadan"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/custom_box4"
+                    android:fontFamily="@font/nunito_sans"
+                    android:inputType="number"
+                    android:hint="Tinggi Badan"
+                    android:padding="@dimen/_5sdp"
+                    android:textColorHint="#6A25262D"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.424"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title5"></EditText>
+
+                <TextView
+                    android:id="@+id/tv_title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/jakartab"
+                    android:text="Nama"
+                    android:textColor="@color/text"
+                    android:textSize="@dimen/_15sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.104"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_profile"></TextView>
+
+                <Spinner
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:id="@+id/spinner_tujuan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_TinggiBadan"></Spinner>
+                <Spinner
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:id="@+id/spinner_intensitas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spinner_tujuan"></Spinner>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:id="@+id/btn_hitung"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/custom_box1"
+                    android:fontFamily="@font/jakartab"
+                    android:text="Hitung"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spinner_intensitas"></androidx.appcompat.widget.AppCompatButton>
+                <TextView
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:id="@+id/tv_kaloriharian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jakartab"
+                    android:text="Kalori Harian"
+                    android:textColor="@color/text"
+                    android:textSize="@dimen/_15sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.128"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_hitung"></TextView>
+                <TextView
+                    android:id="@+id/et_kalori_harian"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/custom_box4"
+                    android:fontFamily="@font/nunito_sans"
+                    android:text="2000"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/_5sdp"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.424"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_kaloriharian"></TextView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

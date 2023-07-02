@@ -88,9 +88,10 @@ class LoginActivity : AppCompatActivity() {
                         email1 = email
                         status1 = status
 
-                        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+                        val sharedPreferences = getSharedPreferences("userPref", Context.MODE_PRIVATE)
                         val editor = sharedPreferences.edit()
                         editor.putBoolean("isLoggedIn", status1)
+                        editor.putString("email",email)
                         editor.apply()
 
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
