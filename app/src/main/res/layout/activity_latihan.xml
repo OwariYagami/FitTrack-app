@@ -149,9 +149,9 @@
                         android:id="@+id/list_durasi"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+
+
                         android:layout_centerInParent="true"
-
-
                         android:fontFamily="@font/jakartab"
                         android:text="Minute"
                         android:textAlignment="center"

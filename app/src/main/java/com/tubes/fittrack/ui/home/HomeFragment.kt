@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.tubes.fittrack.api.Activity
 import com.tubes.fittrack.api.Food
 import com.tubes.fittrack.api.ResponseMakananAktivitas
 import com.tubes.fittrack.api.ResponseUserProfile
@@ -51,11 +52,12 @@ class HomeFragment : Fragment() {
 
         val email: String? = sharedPreferences?.getString("email", "")
         getMakananAktivitas(email!!)
+        getMakananAktivitaskemarin(email!!)
         binding.progressbar.max = user_kalori!!
 
 
         val current = current_kalori!!.toInt()
-        binding.tvCurrentCal.text=current_kalori.toString()
+        binding.tvCurrentCal.setText(String.format("%.1f", current_kalori))
         ObjectAnimator.ofInt(binding.progressbar, "progress", current!!)
             .setDuration(2000)
             .start()
@@ -70,7 +72,64 @@ class HomeFragment : Fragment() {
 
         return root
     }
+    private fun getMakananAktivitaskemarin(email:String){
+        RetrofitClient.instance.getDataMakananAktivitas(email).enqueue(object :
+            Callback<ResponseMakananAktivitas> {
+            override fun onResponse(
+                call: Call<ResponseMakananAktivitas>,
+                response: Response<ResponseMakananAktivitas>,
+            ) {
+                if(response.isSuccessful){
+                    val responseMakananAktivitas = response.body()
+                    val status=responseMakananAktivitas?.status
+                    if (status==true){
+                        if(responseMakananAktivitas != null){
+                            val data=responseMakananAktivitas.data
+                            val makananList=data.makanan
+                            val aktivitasList=data.aktivitas
+                            if(makananList!=null){
+                                val totalkalorimakanan=calculateTotalKalori(makananList)
+                                binding.tvCalo.setText(String.format("%.1f", totalkalorimakanan))
+                            }else{
+                                binding.tvCalo.text="--"
+                            }
 
+                            if(aktivitasList!=null){
+                                val totalkaloriaktivitas=calculateTotalKaloribakar(aktivitasList)
+                                binding.tvBurn.setText(String.format("%.1f", totalkaloriaktivitas))
+                                val persenaktivitas=(totalkaloriaktivitas / user_kalori!!) * 100
+                                binding.tvActi.setText(String.format("%.1f", persenaktivitas))
+                            }else{
+                                binding.tvBurn.text="--"
+                                binding.tvCalo.text="--"
+                                binding.tvActi.text="--"
+                            }
+
+
+
+                        }
+                    }else{
+                        Toast.makeText(requireContext(), "Data Tidak ditemukan", Toast.LENGTH_SHORT).show()
+                        binding.tvCalo.text="--"
+                        binding.tvBurn.text="--"
+                        binding.tvActi.text="--"
+                    }
+
+                }else{
+                    val errorBody = response.errorBody()
+                    if (errorBody != null) {
+                        val errorMessage = errorBody.string()
+                        println("Error: $errorMessage")
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseMakananAktivitas>, t: Throwable) {
+                println("Failure: ${t.message}")
+            }
+
+        })
+    }
     private fun getMakananAktivitas(email: String) {
         RetrofitClient.instance.getDataMakananAktivitas(email)
             .enqueue(object : Callback<ResponseMakananAktivitas> {
@@ -117,6 +176,14 @@ class HomeFragment : Fragment() {
         var totalKalori = 0f
         for (makanan in makananList) {
             val kalori = makanan.kalori.toFloat()
+            totalKalori += kalori
+        }
+        return totalKalori
+    }
+    private fun calculateTotalKaloribakar(aktivitasList: List<Activity>): Float {
+        var totalKalori = 0f
+        for (aktivitas in aktivitasList) {
+            val kalori = aktivitas.kalori.toFloat()
             totalKalori += kalori
         }
         return totalKalori
