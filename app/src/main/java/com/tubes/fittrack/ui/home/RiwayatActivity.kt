@@ -3,6 +3,10 @@ package com.tubes.fittrack.ui.home
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,11 +28,35 @@ class RiwayatActivity : AppCompatActivity() {
 
     private lateinit var aktivitasAdapter: AktivitasAdapter
     private lateinit var aktivitasRecyclerView: RecyclerView
+
+    private lateinit var spinnerTanggal: Spinner
+    private lateinit var tanggalAdapter: ArrayAdapter<String>
+    private lateinit var tanggalList: List<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityRiwayatBinding.inflate(layoutInflater)
         val view=binding.root
         setContentView(view)
+        // Inisialisasi Spinner dan adapter
+        spinnerTanggal = binding.spinnerTanggal
+        tanggalList = emptyList()
+        tanggalAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, tanggalList)
+        tanggalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerTanggal.adapter = tanggalAdapter
+
+
+        // Set listener untuk Spinner
+        spinnerTanggal.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val selectedDate = tanggalList[position]
+                // Panggil metode untuk menampilkan data berdasarkan tanggal yang dipilih
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Kosongkan aksi yang dilakukan jika tidak ada item yang dipilih
+            }
+        }
         //Data Makanan
         makananRecyclerView=binding.recycler2
         makananRecyclerView.layoutManager= LinearLayoutManager(this@RiwayatActivity)
@@ -61,8 +89,9 @@ class RiwayatActivity : AppCompatActivity() {
                             val data=responseMakananAktivitas.data
                             val makananList=data.makanan
                             val aktivitasList=data.aktivitas
-                            val tanggal=data.tanggal
-                            binding.tvTanggal.text=tanggal.toString()
+
+
+
 
                             aktivitasAdapter.setData(aktivitasList)
                             makananAdapter.setData(makananList)

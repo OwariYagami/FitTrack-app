@@ -53,7 +53,12 @@ class HomeFragment : Fragment() {
         val email: String? = sharedPreferences?.getString("email", "")
         getMakananAktivitas(email!!)
         getMakananAktivitaskemarin(email!!)
-        binding.progressbar.max = user_kalori!!
+        if(user_kalori!=null){
+            binding.progressbar.max = user_kalori!!
+        }else{
+            binding.progressbar.max = 0
+        }
+
 
 
         val current = current_kalori!!.toInt()
@@ -73,7 +78,7 @@ class HomeFragment : Fragment() {
         return root
     }
     private fun getMakananAktivitaskemarin(email:String){
-        RetrofitClient.instance.getDataMakananAktivitas(email).enqueue(object :
+        RetrofitClient.instance.getDatakemarin(email).enqueue(object :
             Callback<ResponseMakananAktivitas> {
             override fun onResponse(
                 call: Call<ResponseMakananAktivitas>,

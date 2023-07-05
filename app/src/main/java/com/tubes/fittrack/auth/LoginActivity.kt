@@ -46,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
             val emailUser: String = binding.etEmail.text.toString()
             val passUser: String = binding.etPassword.text.toString()
             loginUser(emailUser, passUser)
+            finish()
         }
 
         binding.btnRegister.setOnClickListener {
@@ -53,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("userPref", Context.MODE_PRIVATE)
         val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
 
         if (isLoggedIn) {

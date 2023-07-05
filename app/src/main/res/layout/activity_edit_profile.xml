@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_app"
+
     tools:context=".ui.profile.ProfileFragment">
 
     <androidx.appcompat.widget.Toolbar
@@ -55,12 +56,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_16sdp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_16sdp"
+                android:layout_marginBottom="@dimen/_16sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -69,7 +71,7 @@
                     android:id="@+id/iv_profile"
                     android:layout_width="146dp"
                     android:layout_height="129dp"
-                    android:src="@drawable/profil"
+                    android:src="@drawable/noimagepp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
@@ -89,6 +91,20 @@
                     app:layout_constraintVertical_bias="0.841">
 
                 </ImageView>
+
+                <TextView
+                    android:id="@+id/tv_title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/jakartab"
+                    android:text="Nama"
+                    android:textColor="@color/text"
+                    android:textSize="@dimen/_15sdp"
+
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_profile"></TextView>
 
                 <EditText
                     android:id="@+id/et_name"
@@ -115,6 +131,62 @@
                     android:textSize="@dimen/_15sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_name"></TextView>
+
+                <EditText
+                    android:id="@+id/et_usia"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/custom_box4"
+                    android:fontFamily="@font/nunito_sans"
+                    android:hint="Usia"
+                    android:inputType="number"
+                    android:padding="@dimen/_5sdp"
+                    android:textColorHint="#6A25262D"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.424"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title3"></EditText>
+                <TextView
+                    android:id="@+id/tv_jk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/jakartab"
+                    android:text="Jenis Kelamin"
+                    android:textColor="@color/text"
+                    android:textSize="@dimen/_15sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_usia"></TextView>
+
+                <RelativeLayout
+                    android:id="@+id/rl0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/custom_et4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_jk">
+
+                    <Spinner
+                        android:id="@+id/spinner_jk"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_centerInParent="true"></Spinner>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_title4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/jakartab"
+                    android:text="Berat Badan"
+                    android:textColor="@color/text"
+                    android:textSize="@dimen/_15sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rl0"></TextView>
 
                 <EditText
                     android:id="@+id/et_BeratBadan"
@@ -145,52 +217,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_BeratBadan"></TextView>
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_simpan"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_45sdp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/custom_button2"
-                    android:fontFamily="@font/jakartab"
-                    android:text="Simpan"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_24sdp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/et_kalori_harian"
-                    app:layout_constraintVertical_bias="0.484" />
-
-                <TextView
-                    android:id="@+id/tv_title4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/jakartab"
-                    android:text="Berat Badan"
-                    android:textColor="@color/text"
-                    android:textSize="@dimen/_15sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/et_usia"></TextView>
-
-                <EditText
-                    android:id="@+id/et_usia"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/custom_box4"
-                    android:fontFamily="@font/nunito_sans"
-                    android:hint="Usia"
-                    android:inputType="number"
-                    android:padding="@dimen/_5sdp"
-                    android:textColorHint="#6A25262D"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.424"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_title3"></EditText>
 
                 <EditText
                     android:id="@+id/et_TinggiBadan"
@@ -208,19 +234,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_title5"></EditText>
 
-                <TextView
-                    android:id="@+id/tv_title2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/jakartab"
-                    android:text="Nama"
-                    android:textColor="@color/text"
-                    android:textSize="@dimen/_15sdp"
 
-
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_profile"></TextView>
                 <TextView
                     android:id="@+id/tv_titletujuan"
                     android:layout_width="wrap_content"
@@ -233,6 +247,7 @@
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_TinggiBadan"></TextView>
+
                 <RelativeLayout
                     android:id="@+id/rl1"
                     android:layout_width="match_parent"
@@ -249,6 +264,7 @@
                         android:layout_height="@dimen/_40sdp"
                         android:layout_centerInParent="true"></Spinner>
                 </RelativeLayout>
+
                 <TextView
                     android:id="@+id/tv_titleintensitas"
                     android:layout_width="wrap_content"
@@ -261,6 +277,7 @@
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rl1"></TextView>
+
                 <RelativeLayout
                     android:id="@+id/rl2"
                     android:layout_width="match_parent"
@@ -275,7 +292,7 @@
                         android:id="@+id/spinner_intensitas"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_40sdp"
-                        android:layout_marginTop="@dimen/_10sdp"></Spinner>
+                       ></Spinner>
                 </RelativeLayout>
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -321,6 +338,24 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_kaloriharian"></TextView>
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_simpan"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/custom_button2"
+                    android:fontFamily="@font/jakartab"
+                    android:text="Simpan"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_24sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_kalori_harian"
+                    app:layout_constraintVertical_bias="0.484" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 

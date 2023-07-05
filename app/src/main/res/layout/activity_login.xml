@@ -76,6 +76,7 @@
                 android:layout_toRightOf="@id/relativeLayout"
                 android:fontFamily="@font/nunito_sans"
                 android:hint="youremail@gmail.com"
+                android:inputType="textEmailAddress"
                 android:background="@null"
                 android:padding="@dimen/_5sdp"
                 android:textColorHint="#6A25262D"></EditText>
@@ -128,6 +129,7 @@
                 android:layout_toRightOf="@id/relativeLayout2"
                 android:fontFamily="@font/nunito_sans"
                 android:hint="password"
+                android:inputType="textPassword"
                 android:background="@null"
                 android:padding="@dimen/_5sdp"
                 android:textColorHint="#6A25262D"></EditText>
@@ -135,7 +137,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_masuk"
         android:text="Masuk"
         android:textColor="@color/white"
@@ -188,7 +190,7 @@
             ></View>
     </RelativeLayout>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_register"
         android:text="Daftar"
         android:textColor="@color/black2"

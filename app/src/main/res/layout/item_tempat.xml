@@ -19,21 +19,22 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/_70sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginBottom="@dimen/_70sdp">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/gambar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/custom_box1"
-                android:src="@drawable/dumbles"
                 android:scaleType="fitXY"
+                android:src="@drawable/dumbles"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +48,7 @@
             android:id="@+id/tv_latihan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:text="Fitsoul Gym"
             android:textColor="@color/text"
             android:textSize="@dimen/_16sdp"
@@ -61,52 +62,64 @@
             android:id="@+id/ic_bintang"
             android:layout_width="@dimen/_19sdp"
             android:layout_height="@dimen/_19sdp"
-            android:layout_marginLeft="@dimen/_25sdp"
-            android:layout_marginTop="2dp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_6sdp"
             android:src="@drawable/star"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_latihan"></ImageView>
 
 
-
         <TextView
             android:id="@+id/tv_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+
             android:text="(5)"
             android:textColor="@color/orange"
             android:textSize="@dimen/_15sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/ic_bintang"
-            app:layout_constraintTop_toTopOf="@id/tv_latihan"
+            app:layout_constraintStart_toEndOf="@+id/ic_bintang"
+
+            app:layout_constraintTop_toBottomOf="@+id/tv_latihan"
             app:layout_constraintVertical_bias="0.85"></TextView>
 
-        <ImageView
-            android:id="@+id/ic_location"
-            android:layout_width="@dimen/_19sdp"
-            android:layout_height="@dimen/_19sdp"
-            android:layout_marginTop="@dimen/_150sdp"
-            android:layout_marginLeft="@dimen/_150sdp"
-            android:src="@drawable/ic_location"
-            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_lihat"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:background="@drawable/custom_button2"
+            android:fontFamily="@font/jakartab"
+            android:text="Lihat Lokasi"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></ImageView>
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"></androidx.appcompat.widget.AppCompatButton>
+<!--        <ImageView-->
+<!--            android:id="@+id/ic_location"-->
+<!--            android:layout_width="@dimen/_19sdp"-->
+<!--            android:layout_height="@dimen/_19sdp"-->
+<!--            android:layout_marginTop="@dimen/_150sdp"-->
+<!--            android:layout_marginLeft="@dimen/_150sdp"-->
+<!--            android:src="@drawable/ic_location"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"></ImageView>-->
 
-        <TextView
-            android:id="@+id/tv_jarak"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1.3km"
-            android:textColor="@color/text"
-            android:textSize="@dimen/_15sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ic_location"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.97"></TextView>
+<!--        <TextView-->
+<!--            android:id="@+id/tv_jarak"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="1.3km"-->
+<!--            android:textColor="@color/text"-->
+<!--            android:textSize="@dimen/_15sdp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/ic_location"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.97"></TextView>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

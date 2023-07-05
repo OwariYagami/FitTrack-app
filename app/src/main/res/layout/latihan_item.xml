@@ -19,17 +19,20 @@
 
         <TextView
             android:id="@+id/tv_latihan"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/_150sdp"
             android:layout_height="wrap_content"
-            android:text="Cable Curl"
             android:layout_marginLeft="@dimen/_10sdp"
+            android:text="Cable Curl"
             android:textColor="@color/text"
+app:layout_constraintHorizontal_bias="0"
             android:textSize="@dimen/_16sdp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/relativeLayout6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"></TextView>
 
         <RelativeLayout
+            android:id="@+id/relativeLayout6"
             android:layout_width="@dimen/_70sdp"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_box11"
@@ -54,10 +57,10 @@
                     android:textSize="@dimen/_16sdp"></TextView>
 
                 <TextView
-                    android:layout_marginLeft="@dimen/_5sdp"
                     android:id="@+id/tv_x"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:layout_toRightOf="@id/tv_rep"
                     android:fontFamily="@font/jakartab"
                     android:text="min"

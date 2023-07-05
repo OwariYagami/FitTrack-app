@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,8 @@ class LocationAdapter(private val dataLocation: ArrayList<DataLocation>): Recycl
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         var nameLocation: TextView = itemView.findViewById(R.id.tv_latihan)
         var gambar: ImageView = itemView.findViewById(R.id.gambar)
+        var lihat: Button = itemView.findViewById(R.id.btn_lihat)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,7 +40,7 @@ class LocationAdapter(private val dataLocation: ArrayList<DataLocation>): Recycl
             .load(imageUrl)
             .apply(RequestOptions().fitCenter())
             .into(holder.gambar)
-        holder.itemView.setOnClickListener {
+        holder.lihat.setOnClickListener {
             val intent = Intent(holder.itemView.context, MapsActivity::class.java)
             intent.putExtra("longitude", location.longitude)
             intent.putExtra("latitude", location.latitude)

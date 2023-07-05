@@ -32,7 +32,10 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications,R.id.navigation_profile
+                R.id.navigation_home,
+                R.id.navigation_dashboard,
+                R.id.navigation_notifications,
+                R.id.navigation_profile
             )
         )
 //        setupActionBarWithNavController(navController, appBarConfiguration)
@@ -49,11 +52,11 @@ class MainActivity : AppCompatActivity() {
             // Jika fragment saat ini adalah fragment Home, panggil metode logout dan pindah ke halaman login
             SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Are you sure?")
-                .setContentText("wanna logout from this app?")
+                .setContentText("Mau Keluar Mas?")
                 .setConfirmText("Yes,do it!!")
                 .setConfirmClickListener { sDialog ->
                     sDialog.dismissWithAnimation()
-                    logoutAndNavigateToLogin()
+                    finish()
                 }
                 .setCancelButton(
                     "Cancel"
@@ -66,22 +69,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun logoutAndNavigateToLogin() {
-        // Lakukan tindakan logout di sini, seperti membersihkan data login
-
-        // Contoh: Membersihkan status login di SharedPreferences
-        val sharedPreferences = getSharedPreferences("userPref", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("isLoggedIn", false)
-        editor.putString("email","")
-        editor.apply()
-
-        // Pindah ke halaman login
-        val intent = Intent(this@MainActivity, LoginActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
-        finish() // Hapus aktivitas ini dari stack agar pengguna tidak dapat kembali ke MainActivity dengan tombol back
-    }
 
 //    override fun onBackPressed() {
 //        super.onBackPressed()
@@ -101,12 +88,12 @@ class MainActivity : AppCompatActivity() {
 ////        Toast.makeText(this@MainActivity, "onDestroyMain", Toast.LENGTH_SHORT).show()
 //    }
 //
-    override fun onStop() {
-        super.onStop()
-        val sharedPreferences = getSharedPreferences("userPref", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("isLoggedIn", false)
-        editor.apply()
-//        Toast.makeText(this@MainActivity, "onStopSplash", Toast.LENGTH_SHORT).show()
-    }
+//    override fun onStop() {
+//        super.onStop()
+//        val sharedPreferences = getSharedPreferences("userPref", Context.MODE_PRIVATE)
+//        val editor = sharedPreferences.edit()
+//        editor.putBoolean("isLoggedIn", false)
+//        editor.apply()
+////        Toast.makeText(this@MainActivity, "onStopSplash", Toast.LENGTH_SHORT).show()
+//    }
 }

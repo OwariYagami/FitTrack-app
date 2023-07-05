@@ -65,7 +65,9 @@ class ProfileFragment : Fragment() {
 
         val email: String? = sharedPreferences?.getString("email","")
         userProfil(email!!, binding)
-
+        binding.btnLogout.setOnClickListener {
+            logoutAndNavigateToLogin()
+        }
         return root;
     }
 
@@ -129,7 +131,34 @@ class ProfileFragment : Fragment() {
         })
     }
 
+    private fun logoutAndNavigateToLogin() {
+        // Lakukan tindakan logout di sini, seperti membersihkan data login
+        SweetAlertDialog(requireContext(), SweetAlertDialog.WARNING_TYPE)
+            .setTitleText("Are you sure?")
+            .setContentText("Apakah anda yakin ingin Logout?")
+            .setConfirmText("Yes,do it!!")
+            .setConfirmClickListener { sDialog ->
+                sDialog.dismissWithAnimation()
+                val sharedPreferences = context?.getSharedPreferences("userPref", Context.MODE_PRIVATE)
+                val editor = sharedPreferences?.edit()
+                editor?.putBoolean("isLoggedIn", false)
+                editor?.putString("email","")
+                editor?.apply()
 
+                // Pindah ke halaman login
+                val intent = Intent(requireContext(), LoginActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                activity?.finish() // Hapus aktivitas ini dari stack agar pengguna tidak dapat kembali ke MainActivity dengan tombol back
+
+
+            }
+            .setCancelButton(
+                "Cancel"
+            ) { sDialog -> sDialog.dismissWithAnimation() }
+            .show()
+        // Contoh: Membersihkan status login di SharedPreferences
+       }
     companion object {
         /**
          * Use this factory method to create a new instance of

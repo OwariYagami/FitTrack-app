@@ -33,18 +33,23 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/tv_tanggal"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/rl2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:fontFamily="@font/jakartab"
-        android:text="23 Maret 2023"
-        android:textColor="@color/br_text"
-        android:textSize="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/custom_et4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"></TextView>
+        android:layout_margin="@dimen/_16sdp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <Spinner
+            android:id="@+id/spinner_tanggal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+          ></Spinner>
+    </RelativeLayout>
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -55,7 +60,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_tanggal"
+        app:layout_constraintTop_toBottomOf="@id/rl2"
         app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -100,20 +105,7 @@
 
                 </androidx.recyclerview.widget.RecyclerView>
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_tmbh_latihan"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:background="@drawable/custom_box1"
-                    android:fontFamily="@font/jakartab"
-                    android:gravity="center_vertical"
-                    android:text="Tambah"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_16sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/recycler1"></androidx.appcompat.widget.AppCompatButton>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+               </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -153,19 +145,7 @@
 
                 </androidx.recyclerview.widget.RecyclerView>
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnTmbhMakanan"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:background="@drawable/custom_box7"
-                    android:fontFamily="@font/jakartab"
-                    android:gravity="center_vertical"
-                    android:text="Tambah"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_16sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/recycler2"></androidx.appcompat.widget.AppCompatButton>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
