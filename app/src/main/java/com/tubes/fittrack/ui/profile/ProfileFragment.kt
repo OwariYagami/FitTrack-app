@@ -55,7 +55,10 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
+        binding.btnHelp.setOnClickListener {
+            val intent = Intent(activity, HelpActivity::class.java)
+            startActivity(intent)
+        }
         binding.btnEdit.setOnClickListener {
             val intent = Intent(activity, EditProfileActivity::class.java)
             startActivity(intent)

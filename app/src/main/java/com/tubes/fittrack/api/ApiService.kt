@@ -10,6 +10,7 @@ import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 interface ApiService {
@@ -71,5 +72,15 @@ interface ApiService {
 
     @GET("all/aktivitas/kemarin/{email}")
     fun getDatakemarin(@Path("email") email: String): Call<ResponseMakananAktivitas>
+
+    @GET("all/tanggal/{email}")
+    fun getTanggal(
+        @Path("email") email: String
+    ): Call<ResponseTanggal>
+    @GET("all/tanggal/aktivitas/{tanggal}")
+    fun getRiwayat(
+        @Path("tanggal") tanggal: String,
+        @Query("email") email: String
+    ): Call<ResponseRiwayat>
 
 }

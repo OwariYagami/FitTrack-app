@@ -101,6 +101,20 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_weight"></TextView>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_help"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginLeft="@dimen/_16sdp"
+        android:layout_marginRight="@dimen/_16sdp"
+        android:background="@drawable/custom_button2"
+        android:text="Help"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/btn_logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></androidx.appcompat.widget.AppCompatButton>
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_logout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"

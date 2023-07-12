@@ -11,10 +11,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/Theme.FitTrack"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.profile.HelpActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.home.RiwayatActivity"
             android:exported="false" />

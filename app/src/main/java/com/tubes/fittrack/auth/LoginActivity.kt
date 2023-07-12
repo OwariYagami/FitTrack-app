@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
             val emailUser: String = binding.etEmail.text.toString()
             val passUser: String = binding.etPassword.text.toString()
             loginUser(emailUser, passUser)
-            finish()
+
         }
 
         binding.btnRegister.setOnClickListener {

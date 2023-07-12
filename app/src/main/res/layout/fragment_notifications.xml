@@ -90,9 +90,9 @@
                     android:layout_height="@dimen/_40sdp"
                     android:background="@drawable/custom_box1"
                     android:fontFamily="@font/jakartab"
-                    android:gravity="center_vertical"
+
                     android:text="Tambah"
-                    android:textAlignment="center"
+
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_16sdp"
@@ -143,9 +143,9 @@
                     android:layout_height="@dimen/_40sdp"
                     android:background="@drawable/custom_box7"
                     android:fontFamily="@font/jakartab"
-                    android:gravity="center_vertical"
+
                     android:text="Tambah"
-                    android:textAlignment="center"
+
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_16sdp"

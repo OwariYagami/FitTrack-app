@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- list_group_header.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/headerTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_14sdp"
+        android:text="Title"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:fontFamily="@font/jakartab"
+        android:textColor="@color/br_text" />
+</LinearLayout>
