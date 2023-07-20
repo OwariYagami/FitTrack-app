@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.Constraints
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -19,7 +21,7 @@ class LocationAdapter(private val dataLocation: ArrayList<DataLocation>): Recycl
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         var nameLocation: TextView = itemView.findViewById(R.id.tv_latihan)
         var gambar: ImageView = itemView.findViewById(R.id.gambar)
-        var lihat: Button = itemView.findViewById(R.id.btn_lihat)
+        var lihat: ConstraintLayout = itemView.findViewById(R.id.btn_lihat)
 
     }
 

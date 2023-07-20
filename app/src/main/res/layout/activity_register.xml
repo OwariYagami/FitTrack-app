@@ -182,8 +182,20 @@
                 android:hint="password"
                 android:inputType="textPassword"
                 android:background="@null"
+                android:layout_marginRight="@dimen/_20sdp"
                 android:padding="@dimen/_5sdp"
                 android:textColorHint="#6A25262D"></EditText>
+            <ImageView
+                android:id="@+id/iv_showhide"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/eyeslash"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+
+                android:clickable="true"
+                android:onClick="onShowHidePasswordClick"></ImageView>
         </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -235,8 +247,19 @@
                 android:hint="Konfirmasi Password"
                 android:inputType="textPassword"
                 android:padding="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_20sdp"
                 android:background="@null"
                 android:textColorHint="#6A25262D"></EditText>
+            <ImageView
+                android:id="@+id/iv_showhide2"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/eyeslash"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:clickable="true"
+                android:onClick="onShowHidePasswordClick2"></ImageView>
         </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -247,8 +270,6 @@
         android:textColor="@color/white"
         android:fontFamily="@font/jakartab"
         android:textSize="@dimen/_25sdp"
-        android:textAlignment="center"
-        android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_10sdp"
@@ -264,17 +285,12 @@
         android:layout_height="@dimen/_35sdp"
         android:background="@drawable/custom_box2"
         android:fontFamily="@font/jakartab"
-        android:gravity="center_vertical"
+
         android:text="Masuk"
-        android:textAlignment="center"
+
         android:textColor="@color/orange"
         android:textSize="@dimen/_16sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlCompat" />
-
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

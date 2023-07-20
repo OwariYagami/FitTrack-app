@@ -3,8 +3,8 @@ import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient {
-    private const val BASE_URL = "http://192.168.196.85:8000/api/"
-    const val IMAGE_URL = "http://192.168.196.85:8000/image/"
+    private const val BASE_URL = "http://192.168.50.85:8000/api/"
+    const val IMAGE_URL = "http://192.168.50.85:8000/image/"
 
     val instance: ApiService by lazy {
         val retrofit = Retrofit.Builder()

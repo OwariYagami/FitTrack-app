@@ -25,4 +25,9 @@
     <color name="gr_hint">#96f2d7</color>
     <color name="gr_primary">#0ca678</color>
     <color name="red2">#B70404</color>
+    <color name="br_tint1">#fff4e6</color>
+    <color name="gr_tint">#e6fcf5</color>
+    <color name="rd_tint">#f6c5c5</color>
+    <color name="rd_tint1">#f68181</color>
+    <color name="rd_primary">#f22a2a</color>
 </resources>

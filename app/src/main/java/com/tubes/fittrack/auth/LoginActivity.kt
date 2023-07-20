@@ -5,6 +5,8 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -23,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
 
 
     private lateinit var binding: ActivityLoginBinding
-
+    private var isPasswordVisible = false
     companion object {
         var name1: String = ""
         var email1: String = ""
@@ -118,5 +120,23 @@ class LoginActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    fun onShowHidePasswordClick(view: View) {
+        if (isPasswordVisible) {
+            // Hide Password
+            binding.etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+            binding.ivShowhide.setImageResource(R.drawable.eyeslash)
+        } else {
+            // Show Password
+            binding.etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            binding.ivShowhide.setImageResource(R.drawable.ic_eye)
+        }
+
+        // Toggle the flag
+        isPasswordVisible = !isPasswordVisible
+
+        // Move cursor to the end of the text
+        binding.etPassword.setSelection(binding.etPassword.text.length)
     }
 }

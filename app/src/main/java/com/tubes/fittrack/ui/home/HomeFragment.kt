@@ -3,34 +3,49 @@ package com.tubes.fittrack.ui.home
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.Paint
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.compose.ui.graphics.Canvas
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.tubes.fittrack.MainActivity
+import com.tubes.fittrack.R
 import com.tubes.fittrack.api.Activity
 import com.tubes.fittrack.api.Food
 import com.tubes.fittrack.api.ResponseMakananAktivitas
 import com.tubes.fittrack.api.ResponseUserProfile
 import com.tubes.fittrack.api.RetrofitClient
 import com.tubes.fittrack.auth.LoginActivity
+import com.tubes.fittrack.databinding.ActivityRiwayatBinding
+import com.tubes.fittrack.databinding.ActivityShareBinding
 import com.tubes.fittrack.databinding.FragmentHomeBinding
 import com.tubes.fittrack.databinding.FragmentProfileBinding
 import com.tubes.fittrack.ui.notifications.MakananActivity
+import com.tubes.fittrack.ui.profile.ShareActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
+    private var binding2: ActivityShareBinding?=null
     private var user_kalori: Int? = 0
     private var current_kalori: Float? = 0f
 
@@ -73,7 +88,12 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-
+        binding2 = ActivityShareBinding.inflate(layoutInflater)
+        val view = binding.root
+        binding.cl1.setOnClickListener {
+            val intent = Intent(requireContext(), ShareActivity::class.java)
+            startActivity(intent)
+        }
 
         return root
     }
@@ -152,6 +172,10 @@ class HomeFragment : Fragment() {
                                 val aktivitasList = data.aktivitas
                                 val totalKalori = calculateTotalKalori(makananList)
                                 current_kalori = totalKalori
+                                val sharedPreferences = requireContext().getSharedPreferences("userPref", Context.MODE_PRIVATE)
+                                val editor = sharedPreferences.edit()
+                                editor.putFloat("kalori",totalKalori)
+                                editor.apply()
                             }
                         } else {
                             Toast.makeText(
@@ -191,6 +215,7 @@ class HomeFragment : Fragment() {
             val kalori = aktivitas.kalori.toFloat()
             totalKalori += kalori
         }
+
         return totalKalori
     }
 
@@ -276,6 +301,85 @@ class HomeFragment : Fragment() {
             else -> "Obesity"
         }
     }
+
+    private fun createImageWithKalori(kalori: Int): Bitmap {
+        val bitmap = Bitmap.createBitmap(500, 200, Bitmap.Config.ARGB_8888)
+        val canvas = android.graphics.Canvas(bitmap)
+
+        // Gambar latar belakang
+        canvas.drawColor(Color.WHITE)
+
+        // Konfigurasi tampilan teks
+        val textSize = 48f
+        val textColor = Color.BLACK
+
+        // Gambar teks
+        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+        paint.textSize = textSize
+        paint.color = textColor
+        paint.style = Paint.Style.FILL
+        paint.textAlign = Paint.Align.CENTER
+
+        // Menggambar teks jumlah kalori di tengah gambar
+        val x = canvas.width / 2f
+        val y = (canvas.height / 2f) - ((paint.descent() + paint.ascent()) / 2f)
+        canvas.drawText("Kalori: $kalori", x, y, paint)
+
+        return bitmap
+    }
+    private fun saveImageToExternalStorage(bitmap: Bitmap): Uri? {
+        val imagesDir = context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val imageFile = File(imagesDir, "kalori_image.jpg")
+
+        return try {
+            val outputStream = FileOutputStream(imageFile)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            outputStream.flush()
+            outputStream.close()
+
+            // Gunakan FileProvider untuk membuat URI yang aman
+            FileProvider.getUriForFile(requireContext(), "${requireContext().packageName}.fileprovider", imageFile)
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        }
+    }
+    private fun saveImageToCache(bitmap: Bitmap): Uri? {
+        val cachePath = File(requireContext().externalCacheDir, "images")
+        cachePath.mkdirs() // Make sure the directory exists
+
+        val imageFile = File(cachePath, "kalori_image.jpg")
+        return try {
+            val outputStream = FileOutputStream(imageFile)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            outputStream.flush()
+            outputStream.close()
+
+            Uri.fromFile(imageFile)
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    private fun getBitmapFromLayout(layoutResId: Int): Bitmap {
+        val view = LayoutInflater.from(requireContext()).inflate(layoutResId, null)
+        val widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+        val heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+        view.measure(widthMeasureSpec, heightMeasureSpec)
+        val width = view.measuredWidth
+        val height = view.measuredHeight
+        view.layout(0, 0, width, height)
+
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = android.graphics.Canvas(bitmap)
+//        canvas.drawColor(Color.WHITE) // Set background color if needed
+        view.draw(canvas)
+
+        return bitmap
+    }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

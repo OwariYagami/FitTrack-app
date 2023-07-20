@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/float_transparent"
+    tools:context=".ui.profile.ShareActivity">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_16sdp"
+        app:cardElevation="@dimen/_5sdp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/_16sdp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:src="@drawable/profil"
+            android:layout_centerHorizontal="true"
+            ></de.hdodenhof.circleimageview.CircleImageView>
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User"
+            android:textColor="@color/br_text"
+            android:textSize="@dimen/_16sdp"
+            android:fontFamily="@font/jakartab"
+            android:layout_below="@+id/iv_profile"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_10sdp"></TextView>
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jumlah Kalori Hari Ini :"
+            android:textColor="@color/br_text"
+            android:textSize="@dimen/_16sdp"
+            android:fontFamily="@font/jakartab"
+            android:layout_below="@+id/tv_username"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_10sdp"></TextView>
+        <TextView
+            android:id="@+id/tv_kalori"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1000"
+            android:textColor="@color/br_text"
+            android:textSize="@dimen/_18sdp"
+            android:fontFamily="@font/jakartab"
+            android:layout_below="@+id/tv_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_10sdp"></TextView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_share"
+            android:layout_width="@dimen/_130sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_below="@+id/tv_kalori"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/bg_button_lokasi"
+            android:drawableStart="@drawable/ic_share"
+            android:fontFamily="@font/jakartab"
+            android:padding="@dimen/_5sdp"
+            android:text="Share Progress"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"></androidx.appcompat.widget.AppCompatButton>
+    </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

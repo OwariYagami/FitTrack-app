@@ -149,8 +149,9 @@ class EditProfileActivity : AppCompatActivity() {
                 // Do nothing
             }
         }
+
         binding.btnSimpan.setOnClickListener {
-            val email: String = LoginActivity.email1
+
             val name: String = binding.etName.text.toString()
             val usia: String = binding.etUsia.text.toString()
             val bBadan: String = binding.etBeratBadan.text.toString()

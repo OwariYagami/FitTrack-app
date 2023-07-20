@@ -22,7 +22,7 @@
             android:id="@+id/iv_logo"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_70sdp"
-            android:scaleType="centerInside"
+            android:scaleType="fitCenter"
             android:src="@drawable/gym_logo_dark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -51,7 +51,8 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="129.5dp"
         tools:listitem="@layout/item_tempat"
-        android:id="@+id/rv_location">
+        android:id="@+id/rv_location"
+        android:layout_marginBottom="@dimen/_50sdp">
 
 
 

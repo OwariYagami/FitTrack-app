@@ -68,6 +68,7 @@ class ProfileFragment : Fragment() {
 
         val email: String? = sharedPreferences?.getString("email","")
         userProfil(email!!, binding)
+        binding.tvEmail.text=email
         binding.btnLogout.setOnClickListener {
             logoutAndNavigateToLogin()
         }
