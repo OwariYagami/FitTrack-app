@@ -1,6 +1,7 @@
 package com.tubes.fittrack.ui.notifications
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.tubes.fittrack.MainActivity
 import com.tubes.fittrack.R
 import com.tubes.fittrack.api.ResponseTambahMakanan
 import com.tubes.fittrack.api.RetrofitClient
@@ -21,6 +23,7 @@ import com.tubes.fittrack.ninjasApi.ActivityItem
 import com.tubes.fittrack.ninjasApi.ApiClient
 import com.tubes.fittrack.ninjasApi.ApiClient.apiService
 import com.tubes.fittrack.ninjasApi.LatihanItemAdapter
+import com.tubes.fittrack.ui.home.HomeFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -90,7 +93,11 @@ class LatihanActivity : AppCompatActivity() {
                     +" , "+binding.etKalori.text.toString(), Toast.LENGTH_SHORT).show()
         }
 
-
+        binding.ivBack.setOnClickListener {
+            val intent = Intent(this@LatihanActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     fun displayClickedItem(item1: String, item2: String, item3: String) {

@@ -1,6 +1,7 @@
 package com.tubes.fittrack.ui.notifications
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.widget.Toast
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.tubes.fittrack.MainActivity
 import com.tubes.fittrack.R
 import com.tubes.fittrack.api.ResponseTambahMakanan
 import com.tubes.fittrack.api.ResponseUserProfile
@@ -23,6 +25,7 @@ import com.tubes.fittrack.caloriesApi.FoodItemAdapter
 import retrofit2.*
 import com.tubes.fittrack.databinding.ActivityMakananBinding
 import com.tubes.fittrack.ninjasApi.ActivityItem
+import com.tubes.fittrack.ui.home.HomeFragment
 
 
 class MakananActivity : AppCompatActivity() {
@@ -86,7 +89,11 @@ class MakananActivity : AppCompatActivity() {
             Toast.makeText(this@MakananActivity, "Save :"+binding.listMakanan.text.toString()+" ,"+binding.etKalori.text.toString()
                 +" , "+binding.etTakaran.text.toString(), Toast.LENGTH_SHORT).show()
         }
-
+        binding.ivBack.setOnClickListener {
+            val intent = Intent(this@MakananActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     fun displayClickedItem(item1: String,item2: String,item3: String) {

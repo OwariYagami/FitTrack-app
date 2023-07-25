@@ -147,6 +147,11 @@ class ProfileFragment : Fragment() {
                 val editor = sharedPreferences?.edit()
                 editor?.putBoolean("isLoggedIn", false)
                 editor?.putString("email","")
+                editor?.putString("kelamin","")
+                editor?.putString("name","")
+                editor?.putInt("b_badan",0)
+                editor?.putInt("t_badan",0)
+                editor?.putInt("user_kalori",0)
                 editor?.apply()
 
                 // Pindah ke halaman login

@@ -1,29 +1,41 @@
 package com.tubes.fittrack.ui.profile
 
-import android.R
+
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.OpenableColumns
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.tubes.fittrack.MainActivity
+import com.tubes.fittrack.R
+import android.R as R2
 import com.tubes.fittrack.api.ResponseUpdateProfil
 import com.tubes.fittrack.api.ResponseUserProfile
 import com.tubes.fittrack.api.RetrofitClient
 import com.tubes.fittrack.auth.LoginActivity
 import com.tubes.fittrack.databinding.ActivityEditProfileBinding
 import com.tubes.fittrack.databinding.FragmentProfileBinding
+import com.tubes.fittrack.ui.home.HomeFragment
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -47,7 +59,7 @@ class EditProfileActivity : AppCompatActivity() {
     private lateinit var selecttujuan: String
     private lateinit var selectintensitas: String
     private lateinit var selectkelamin: String
-
+    private  var email: String?=""
 
     lateinit var binding: ActivityEditProfileBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,71 +68,17 @@ class EditProfileActivity : AppCompatActivity() {
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
-        val spinner: Spinner = binding.spinnerTujuan
-        val adapter = ArrayAdapter(this, R.layout.simple_spinner_item, spinnerItems)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = adapter
-
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View?,
-                position: Int,
-                id: Long,
-            ) {
-                selecttujuan = parent.getItemAtPosition(position).toString()
-                Toast.makeText(
-                    applicationContext,
-                    "Selected item: $selecttujuan",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // Do nothing
-            }
+        binding.btnUpdateKalori.setOnClickListener {
+            showCustomDialog()
         }
 
-        val spinner2: Spinner = binding.spinnerIntensitas
-        val adapter2 = ArrayAdapter(this, R.layout.simple_spinner_item, spinnerItems2)
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner2.adapter = adapter2
 
-        spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View?,
-                position: Int,
-                id: Long,
-            ) {
-                selectintensitas = parent.getItemAtPosition(position).toString()
-                Toast.makeText(
-                    applicationContext,
-                    "Selected item: $selectintensitas",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // Do nothing
-            }
-        }
-        binding.btnHitung.setOnClickListener {
-//            hitungKalori(selecttujuan,selectintensitas)
 
-            binding.etKaloriHarian.setText(
-                String.format(
-                    "%.1f",
-                    calculateDailyCalorieNeeds(selectkelamin, selectintensitas, selecttujuan)
-                )
-            )
-        }
+
         val sharedPreferences = getSharedPreferences("userPref", Context.MODE_PRIVATE)
 
-        val email: String? = sharedPreferences?.getString("email", "")
+       email = sharedPreferences?.getString("email", "")
         userProfil(email!!)
 
         binding.ivProfile.setOnClickListener {
@@ -158,76 +116,15 @@ class EditProfileActivity : AppCompatActivity() {
             val tBadan: String = binding.etTinggiBadan.text.toString()
             val kalori: String = binding.etKaloriHarian.text.toString()
             val kelamin: String = selectkelamin.toString()
-            uploadPorfileData(email, imageFile, name, usia, kelamin, bBadan, tBadan, kalori)
+            uploadPorfileData(email!!, imageFile, name, usia, kelamin, bBadan, tBadan, kalori)
         }
-
-    }
-
-    private fun hitungKalori(tujuan: String, intensitas: String) {
-        if (tujuan == "Menaikkan Berat Badan" && intensitas == "Light") {
-            val input = binding.etBeratBadan.text.toString()
-            val bb = input.toInt()
-            val intensitas = 1.55
-            val kalori_harian = ((bb * 24) * intensitas) + 100
-            binding.etKaloriHarian.setText(String.format("%.1f", kalori_harian))
-
-        } else if (tujuan == "Menaikkan Berat Badan" && intensitas == "Moderate") {
-            val input = binding.etBeratBadan.text.toString()
-            val bb = input.toInt()
-            val intensitas = 1.65
-            val kalori_harian = ((bb * 24) * intensitas) + 100
-            binding.etKaloriHarian.setText(String.format("%.1f", kalori_harian))
-        } else if (tujuan == "Menaikkan Berat Badan" && intensitas == "Heavy") {
-            val input = binding.etBeratBadan.text.toString()
-            val bb = input.toInt()
-            val intensitas = 1.8
-            val kalori_harian = ((bb * 24) * intensitas) + 100
-            binding.etKaloriHarian.setText(String.format("%.1f", kalori_harian))
-
-        } else if (tujuan == "Menurunkan Berat Badan" && intensitas == "Light") {
-            val input = binding.etBeratBadan.text.toString()
-            val bb = input.toInt()
-            val intensitas = 1.55
-            val kalori_harian = ((bb * 24) * intensitas) - 100
-            binding.etKaloriHarian.setText(String.format("%.1f", kalori_harian))
-
-        } else if (tujuan == "Menurunkan Berat Badan" && intensitas == "Moderate") {
-            val input = binding.etBeratBadan.text.toString()
-            val bb = input.toInt()
-            val intensitas = 1.65
-            val kalori_harian = ((bb * 24) * intensitas) - 100
-            binding.etKaloriHarian.setText(String.format("%.1f", kalori_harian))
-
-        } else if (tujuan == "Menurunkan Berat Badan" && intensitas == "Heavy") {
-            val input = binding.etBeratBadan.text.toString()
-            val bb = input.toInt()
-            val intensitas = 1.8
-            val kalori_harian = ((bb * 24) * intensitas) - 100
-            binding.etKaloriHarian.setText(String.format("%.1f", kalori_harian))
-
-        } else if (tujuan == "Menjaga Berat Badan" && intensitas == "Light") {
-            val input = binding.etBeratBadan.text.toString()
-            val bb = input.toInt()
-            val intensitas = 1.55
-            val kalori_harian = ((bb * 24) * intensitas)
-            binding.etKaloriHarian.setText(String.format("%.1f", kalori_harian))
-
-        } else if (tujuan == "Menjaga Berat Badan" && intensitas == "Moderate") {
-            val input = binding.etBeratBadan.text.toString()
-            val bb = input.toInt()
-            val intensitas = 1.55
-            val kalori_harian = ((bb * 24) * intensitas)
-            binding.etKaloriHarian.setText(String.format("%.1f", kalori_harian))
-
-        } else if (tujuan == "Menjaga Berat Badan" && intensitas == "Heavy") {
-            val input = binding.etBeratBadan.text.toString()
-            val bb = input.toInt()
-            val intensitas = 1.8
-            val kalori_harian = ((bb * 24) * intensitas)
-            binding.etKaloriHarian.setText(String.format("%.1f", kalori_harian))
-
+        binding.btnBack.setOnClickListener {
+            val intent = Intent(this@EditProfileActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
+
 
     // Fungsi untuk menghitung kebutuhan kalori harian
     fun calculateDailyCalorieNeeds(gender: String, activityLevel: String, goal: String): Double {
@@ -306,6 +203,7 @@ class EditProfileActivity : AppCompatActivity() {
                             val b_badan: Int? = data?.b_badan
                             val t_badan: Int? = data?.t_badan
                             val image: String? = data?.image
+                            val kalori: Int?=data?.kalori
 
                             if (image != null) {
                                 val imageUrl: String = RetrofitClient.IMAGE_URL + image
@@ -329,6 +227,9 @@ class EditProfileActivity : AppCompatActivity() {
                             if (t_badan != null) {
                                 binding.etTinggiBadan.setText(t_badan.toString())
                             }
+                            if (kalori != null) {
+                                binding.etKaloriHarian.setText(kalori.toString())
+                            }
                         }
                     }
                     pDialog.dismiss()
@@ -340,6 +241,7 @@ class EditProfileActivity : AppCompatActivity() {
                 }
 
             })
+
     }
 
     fun uploadPorfileData(
@@ -352,7 +254,13 @@ class EditProfileActivity : AppCompatActivity() {
         t_badan: String,
         kalori: String,
     ) {
+        val pDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
         if (imageFile != null && imageFile.exists()) {
+
+            pDialog.progressHelper.barColor = Color.parseColor("#A5DC86")
+            pDialog.titleText = "Update Profil"
+            pDialog.setCancelable(false)
+            pDialog.show()
             // Buat RequestBody untuk file gambar
             val mediaType = MediaType.parse("image/*")
             val requestFile: RequestBody = RequestBody.create(mediaType, imageFile)
@@ -387,6 +295,7 @@ class EditProfileActivity : AppCompatActivity() {
                     val message = updateResponse?.message
 
                     if (status == true) {
+                        pDialog.dismiss()
                         Toast.makeText(
                             this@EditProfileActivity,
                             "Profil $message",
@@ -402,6 +311,10 @@ class EditProfileActivity : AppCompatActivity() {
             })
 
         } else {
+            pDialog.progressHelper.barColor = Color.parseColor("#A5DC86")
+            pDialog.titleText = "Update Profil"
+            pDialog.setCancelable(false)
+            pDialog.show()
             val nameBody: RequestBody = RequestBody.create(MediaType.parse("text/plain"), name)
             val usiaBody: RequestBody = RequestBody.create(MediaType.parse("text/plain"), usia)
             val kelaminBody: RequestBody =
@@ -430,6 +343,7 @@ class EditProfileActivity : AppCompatActivity() {
                     val message = updateResponse?.message
 
                     if (status == true) {
+                        pDialog.dismiss()
                         Toast.makeText(
                             this@EditProfileActivity,
                             "Profil $message",
@@ -443,6 +357,90 @@ class EditProfileActivity : AppCompatActivity() {
                 }
 
             })
+        }
+    }
+    fun showCustomDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_form_kalori, null)
+        val hitung = dialogView.findViewById<Button>(R.id.btn_hitung)
+        val ok = dialogView.findViewById<Button>(R.id.btn_ok)
+        val cancel = dialogView.findViewById<ImageView>(R.id.btn_cancel)
+        val kalori_harian = dialogView.findViewById<TextView>(R.id.et_kalori_harian)
+        val spinner: Spinner = dialogView.findViewById(R.id.spinner_tujuan)
+        val adapter = ArrayAdapter(this, R2.layout.simple_spinner_item, spinnerItems)
+        adapter.setDropDownViewResource(R2.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long,
+            ) {
+                selecttujuan = parent.getItemAtPosition(position).toString()
+
+            }
+
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Do nothing
+            }
+        }
+        val spinner2: Spinner = dialogView.findViewById(R.id.spinner_intensitas)
+        val adapter2 = ArrayAdapter(this, R2.layout.simple_spinner_item, spinnerItems2)
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner2.adapter = adapter2
+
+        spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long,
+            ) {
+                selectintensitas = parent.getItemAtPosition(position).toString()
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Do nothing
+            }
+        }
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setView(dialogView)
+
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.window?.attributes?.windowAnimations = R.style.animation
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        alertDialog.show()
+        ok.setOnClickListener{
+            val name: String = binding.etName.text.toString()
+            val usia: String = binding.etUsia.text.toString()
+            val bBadan: String = binding.etBeratBadan.text.toString()
+            val tBadan: String = binding.etTinggiBadan.text.toString()
+            val kalori: String = binding.etKaloriHarian.text.toString()
+            val kelamin: String = selectkelamin.toString()
+
+
+            uploadPorfileData(email!!, imageFile, name, usia, kelamin, bBadan, tBadan, kalori)
+
+
+        }
+        cancel.setOnClickListener{
+            alertDialog.dismiss()
+        }
+        hitung.setOnClickListener {
+//            hitungKalori(selecttujuan,selectintensitas)
+            kalori_harian.setText(
+                String.format(
+                    "%.1f",
+                    calculateDailyCalorieNeeds(selectkelamin, selectintensitas, selecttujuan)
+                )
+            )
+
+            binding.etKaloriHarian.setText(
+                String.format("%.1f", calculateDailyCalorieNeeds(selectkelamin, selectintensitas, selecttujuan))
+            )
         }
     }
 

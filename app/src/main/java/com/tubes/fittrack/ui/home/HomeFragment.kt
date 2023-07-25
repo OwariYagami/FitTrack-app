@@ -34,6 +34,7 @@ import com.tubes.fittrack.databinding.ActivityShareBinding
 import com.tubes.fittrack.databinding.FragmentHomeBinding
 import com.tubes.fittrack.databinding.FragmentProfileBinding
 import com.tubes.fittrack.ui.notifications.MakananActivity
+import com.tubes.fittrack.ui.profile.EditProfileActivity
 import com.tubes.fittrack.ui.profile.ShareActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -68,12 +69,12 @@ class HomeFragment : Fragment() {
         val email: String? = sharedPreferences?.getString("email", "")
         getMakananAktivitas(email!!)
         getMakananAktivitaskemarin(email!!)
+
         if(user_kalori!=null){
             binding.progressbar.max = user_kalori!!
         }else{
             binding.progressbar.max = 0
         }
-
 
 
         val current = current_kalori!!.toInt()
@@ -94,7 +95,27 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireContext(), ShareActivity::class.java)
             startActivity(intent)
         }
+        binding.btnUpdateBb.setOnClickListener {
+            val intent = Intent(requireContext(), EditProfileActivity::class.java)
+            startActivity(intent)
+        }
+        binding.refresh.setOnRefreshListener {
+            userProfil(email!!,binding!!)
+            getMakananAktivitas(email!!)
+            getMakananAktivitaskemarin(email!!)
+            if(user_kalori!=null){
+                binding.progressbar.max = user_kalori!!
+            }else{
+                binding.progressbar.max = 0
+            }
 
+            val current = current_kalori!!.toInt()
+            binding.tvCurrentCal.setText(String.format("%.1f", current_kalori))
+            ObjectAnimator.ofInt(binding.progressbar, "progress", current!!)
+                .setDuration(2000)
+                .start()
+            binding.refresh.isRefreshing=false
+        }
         return root
     }
     private fun getMakananAktivitaskemarin(email:String){
@@ -270,10 +291,21 @@ class HomeFragment : Fragment() {
                             val imt = calculateBMI(b_badan.toDouble(), t_badan.toDouble())
                             binding.tvImt.setText(String.format("%.1f", imt))
                             binding.tvCategory.setText(interpretasiBMI(imt))
+                            binding.tvDeskripsi1.text="IMT anda menunjukkan "+interpretasiBMI(imt)
+                            val imtresult=interpretasiBMI(imt)
+                            val imtdesc=getBMIDescription(imtresult)
+
+                            binding.tvDeskripsi2.text=imtdesc
+
 
                         } else {
                             binding.tvImt.setText("--")
                             binding.tvCategory.setText("--")
+                        }
+
+                        if(b_badan==0){
+                            val intent = Intent(activity, EditProfileActivity::class.java)
+                            startActivity(intent)
                         }
                     }
                 }
@@ -299,6 +331,15 @@ class HomeFragment : Fragment() {
             bmi < 25.0 -> "Normal"
             bmi < 30.0 -> "Overweight"
             else -> "Obesity"
+        }
+    }
+    fun getBMIDescription(bmiResult: String): String {
+        return when (bmiResult) {
+            "Underweight" -> "Anda dapat menggunakan aplikasi ini untuk Bulking(Menaikkan Berat Badan) untuk mencapai berat badan ideal."
+            "Normal" -> "Anda dapat menggunakan aplikasi ini untuk Bulking (Menaikkan berat badan), Diet (Menurunkan berat badan) sesuai keinginan anda, atau menjaga berat badan anda."
+            "Overweight" -> "Anda dapat menggunakan aplikasi ini untuk diet atau menjaga berat badan anda."
+            "Obesity" -> "Anda dapat menggunakan aplikasi ini untuk melakukan diet agar berat badan anda kembali normal dan tidak mengganggu kesehatan anda"
+            else -> "Tidak dapat menemukan interpretasi BMI Anda."
         }
     }
 

@@ -65,7 +65,10 @@ class NotificationsFragment : Fragment() {
 
         val email: String? = sharedPreferences?.getString("email","")
         getMakananAktivitas(email!!)
-
+        binding.refresh.setOnRefreshListener {
+            getMakananAktivitas(email!!)
+            binding.refresh.isRefreshing=false
+        }
 
         return root
     }

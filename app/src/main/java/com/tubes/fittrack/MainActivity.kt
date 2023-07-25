@@ -13,6 +13,8 @@ import androidx.navigation.ui.setupWithNavController
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.tubes.fittrack.auth.LoginActivity
 import com.tubes.fittrack.databinding.ActivityMainBinding
+import com.tubes.fittrack.ui.home.HomeFragment
+import com.tubes.fittrack.ui.profile.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,6 +42,15 @@ class MainActivity : AppCompatActivity() {
         )
 //        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        if (intent.hasExtra("FROM_RIWAYAT_ACTIVITY")) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, HomeFragment())
+                .commit()
+        }else if (intent.hasExtra("FROM_EDIT_PROFILE_ACTIVITY")) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, ProfileFragment())
+                .commit()
+        }
     }
 
     override fun onBackPressed() {

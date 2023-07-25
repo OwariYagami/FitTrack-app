@@ -1,6 +1,7 @@
 package com.tubes.fittrack.ui.home
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,7 +13,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.tubes.fittrack.MainActivity
 import com.tubes.fittrack.R
+import com.tubes.fittrack.api.Activity
+import com.tubes.fittrack.api.Food
 import com.tubes.fittrack.api.ResponseMakananAktivitas
 import com.tubes.fittrack.api.ResponseRiwayat
 import com.tubes.fittrack.api.ResponseTanggal
@@ -22,6 +26,7 @@ import com.tubes.fittrack.auth.LoginActivity
 import com.tubes.fittrack.databinding.ActivityRiwayatBinding
 import com.tubes.fittrack.ui.notifications.AktivitasAdapter
 import com.tubes.fittrack.ui.notifications.MakananAdapter
+import com.tubes.fittrack.ui.profile.ProfileFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -86,6 +91,13 @@ class RiwayatActivity : AppCompatActivity() {
         aktivitasRecyclerView.adapter = aktivitasAdapter
 
 
+        binding.ivBack.setOnClickListener {
+            val intent = Intent(this@RiwayatActivity, MainActivity::class.java)
+
+            startActivity(intent)
+            finish()
+        }
+
     }
 
     private fun getMakananAktivitas(tanggal: String, email: String) {
@@ -110,6 +122,20 @@ class RiwayatActivity : AppCompatActivity() {
                             val aktivitasList = data.aktivitas
                             aktivitasAdapter.setData(aktivitasList)
                             makananAdapter.setData(makananList)
+                            if(makananList!=null){
+                                val totalkalorimakanan=calculateTotalKaloriMakanan(makananList)
+                                binding.tvTotalKaloriMakanan.setText(String.format("%.1f", totalkalorimakanan))
+                            }else{
+                                binding.tvTotalKaloriMakanan.text="--"
+                            }
+
+                            if(aktivitasList!=null){
+                                val totalkaloriaktivitas=calculateTotalKaloribakar(aktivitasList)
+                                binding.tvTotalKaloriAktivitas.setText(String.format("%.1f", totalkaloriaktivitas))
+
+                            }else{
+                                binding.tvTotalKaloriAktivitas.text="--"
+                            }
                         }
                     } else {
                         Toast.makeText(
@@ -178,5 +204,24 @@ class RiwayatActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun calculateTotalKaloriMakanan(makananList: List<Food>): Float {
+        var totalKalori = 0f
+        for (makanan in makananList) {
+            val kalori = makanan.kalori.toFloat()
+            totalKalori += kalori
+        }
+        return totalKalori
+    }
+
+    private fun calculateTotalKaloribakar(aktivitasList: List<Activity>): Float {
+        var totalKalori = 0f
+        for (aktivitas in aktivitasList) {
+            val kalori = aktivitas.kalori.toFloat()
+            totalKalori += kalori
+        }
+
+        return totalKalori
     }
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_16sdp"
+    android:background="@drawable/bg_dialog_kalori"
+    android:orientation="vertical">
+    <ImageView
+        android:id="@+id/btn_cancel"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:src="@drawable/ic_x"
+        android:layout_gravity="end"></ImageView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Berat Badan"
+        android:textColor="@color/text"
+        android:fontFamily="@font/jakartab"
+        android:textSize="@dimen/_14sdp"
+        android:layout_gravity="center_horizontal"></TextView>
+
+    <TextView
+        android:id="@+id/tv_bb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/jakartab"
+        android:text="Berat Badan"
+        android:textColor="@color/text"
+        android:textSize="@dimen/_15sdp"
+
+       ></TextView>
+
+    <EditText
+        android:id="@+id/et_bb"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/custom_box4"
+        android:fontFamily="@font/jakartab"
+        android:gravity="center_vertical"
+        android:padding="@dimen/_5sdp"
+        android:text="2000"
+        android:textSize="@dimen/_12sdp"
+       ></EditText>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_simpan"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/custom_box2"
+        android:fontFamily="@font/jakartab"
+        android:text="Simpan"
+        android:textAllCaps="false"
+        android:textColor="@color/text"
+        android:textSize="@dimen/_16sdp"
+        ></androidx.appcompat.widget.AppCompatButton>
+</LinearLayout>

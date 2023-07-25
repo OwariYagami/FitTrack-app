@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/iv_back"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:src="@drawable/ic_back"></ImageView>
@@ -105,9 +106,42 @@
 
                 </androidx.recyclerview.widget.RecyclerView>
 
+
                </androidx.constraintlayout.widget.ConstraintLayout>
+            <RelativeLayout
+                android:id="@+id/tv_kalori_aktivitas"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@drawable/custom_card4"
+                app:layout_constraintTop_toBottomOf="@id/cl1">
+                <TextView
+                    android:layout_marginLeft="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Kalori Dibakar"
+                    android:textSize="@dimen/_14sdp"
+                    android:fontFamily="@font/jakartab"
+                    android:textColor="@color/br_text"
+                   ></TextView>
+                <TextView
+                    android:id="@+id/tv_total_kalori_aktivitas"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1500"
+                    android:layout_marginRight="@dimen/_8sdp"
+                    android:textSize="@dimen/_14sdp"
+                    android:fontFamily="@font/jakartab"
+                    android:textColor="@color/br_text"
+                    android:layout_alignParentRight="true"
+                    ></TextView>
+            </RelativeLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
@@ -115,7 +149,7 @@
                 android:padding="@dimen/_5sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cl1">
+                app:layout_constraintTop_toBottomOf="@+id/tv_kalori_aktivitas">
 
                 <TextView
                     android:id="@+id/tv_asupan"
@@ -147,6 +181,37 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <RelativeLayout
+                android:id="@+id/tv_kalori_makanan"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@drawable/custom_card5"
+                app:layout_constraintTop_toBottomOf="@id/cl2">
+                <TextView
+                    android:layout_marginLeft="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Kalori Makanan"
+                    android:textSize="@dimen/_14sdp"
+                    android:fontFamily="@font/jakartab"
+                    android:textColor="@color/gr_text"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/tv_total_kalori_makanan"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1500"
+                    android:layout_marginRight="@dimen/_8sdp"
+                    android:textSize="@dimen/_14sdp"
+                    android:fontFamily="@font/jakartab"
+                    android:textColor="@color/gr_text"
+                    android:layout_alignParentRight="true"
+                    ></TextView>
+            </RelativeLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

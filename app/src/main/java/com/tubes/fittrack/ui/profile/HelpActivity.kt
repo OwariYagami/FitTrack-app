@@ -1,10 +1,13 @@
 package com.tubes.fittrack.ui.profile
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ExpandableListView
+import com.tubes.fittrack.MainActivity
 import com.tubes.fittrack.R
 import com.tubes.fittrack.databinding.ActivityHelpBinding
+import com.tubes.fittrack.ui.home.HomeFragment
 
 class HelpActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHelpBinding
@@ -24,7 +27,11 @@ class HelpActivity : AppCompatActivity() {
         adapter = HelpAdapter(this, data)
         expandableListView.setAdapter(adapter)
 
-
+        binding.ivBack.setOnClickListener {
+            val intent = Intent(this@HelpActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
     }
