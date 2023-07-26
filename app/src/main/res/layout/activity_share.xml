@@ -13,14 +13,19 @@
         android:layout_margin="@dimen/_10sdp"
         app:cardCornerRadius="@dimen/_16sdp"
         app:cardElevation="@dimen/_5sdp"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
     <RelativeLayout
+        android:background="@drawable/bg_share"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/_250sdp"
         android:padding="@dimen/_16sdp">
+        <ImageView
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/app_icon"
+            android:scaleType="fitCenter"></ImageView>
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_profile"
             android:layout_width="@dimen/_70sdp"

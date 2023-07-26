@@ -52,7 +52,7 @@ class EditProfileActivity : AppCompatActivity() {
 
     private var imageFile: File? = null
     private lateinit var spinnerJenisKelamin: Spinner
-    private val spinnerItems = arrayOf("Bulking", "Diet")
+    private val spinnerItems = arrayOf("Bulking", "Diet","Maintain Weight")
     private val spinnerItems2 = arrayOf("Tingkat Rendah", "Sedang", "Tinggi", "Sangat Tinggi")
     private val jenisKelaminArray = arrayOf("Pria", "Wanita")
 
@@ -157,6 +157,7 @@ class EditProfileActivity : AppCompatActivity() {
         when (goal) {
             "Bulking" -> goalFactor = 1.2
             "Diet" -> goalFactor = 0.8
+            "Maintain Weight" -> goalFactor=1.0
             else -> goalFactor = 1.0
         }
 

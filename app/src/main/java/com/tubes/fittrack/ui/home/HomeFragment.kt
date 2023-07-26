@@ -67,8 +67,10 @@ class HomeFragment : Fragment() {
         val sharedPreferences = context?.getSharedPreferences("userPref", Context.MODE_PRIVATE)
 
         val email: String? = sharedPreferences?.getString("email", "")
+        userProfil(email!!, _binding!!)
         getMakananAktivitas(email!!)
         getMakananAktivitaskemarin(email!!)
+
 
         if(user_kalori!=null){
             binding.progressbar.max = user_kalori!!
@@ -83,7 +85,7 @@ class HomeFragment : Fragment() {
             .setDuration(2000)
             .start()
 
-        userProfil(email!!, _binding!!)
+
         binding.tvLihatRiwayat.setOnClickListener {
             val intent = Intent(activity, RiwayatActivity::class.java)
             startActivity(intent)
@@ -268,6 +270,17 @@ class HomeFragment : Fragment() {
                             binding.tvTargetCal.text = "/" + user_kalori.toString()
                         } else {
                             binding.tvTargetCal.text = "/--"
+                            SweetAlertDialog(requireContext(), SweetAlertDialog.WARNING_TYPE)
+                                .setTitleText("Informasi")
+                                .setContentText("Anda belum mengisi data diri, isi terlebih dahulu !!")
+                                .setConfirmText("Baik")
+                                .setConfirmClickListener { sDialog ->
+                                    sDialog.dismissWithAnimation()
+                                    val intent =
+                                        Intent(requireContext(), EditProfileActivity::class.java)
+                                    startActivity(intent)
+                                }.show()
+
                         }
                         if (b_badan != null) {
                             binding.tvWeight.setText(b_badan.toString())

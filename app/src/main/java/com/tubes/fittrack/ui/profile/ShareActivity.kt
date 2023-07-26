@@ -6,28 +6,27 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.system.Os.link
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.tubes.fittrack.R
 import com.tubes.fittrack.api.ResponseUserProfile
 import com.tubes.fittrack.api.RetrofitClient
-
 import com.tubes.fittrack.databinding.ActivityShareBinding
-
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+
 
 class ShareActivity : AppCompatActivity() {
     private lateinit var binding:ActivityShareBinding
@@ -54,8 +53,13 @@ class ShareActivity : AppCompatActivity() {
             if (imageUri != null) {
                 val shareIntent = Intent(Intent.ACTION_SEND)
                 shareIntent.type = "image/jpeg"
+                val link="https://play.google.com/store/apps/details?id=com.miHoYo.GenshinImpact&hl=en-ID"
+                val isi = "Saya telah Mencapai $kalori kalori hari ini, Ayoo track juga aktivitas dan makananmu dalam FitTrack, Capai tubuh bugar mu $link"
+
                 shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "FitTrack");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, isi);
                 startActivity(Intent.createChooser(shareIntent,"Share To"))
                 binding.btnShare.visibility = View.VISIBLE
             } else {

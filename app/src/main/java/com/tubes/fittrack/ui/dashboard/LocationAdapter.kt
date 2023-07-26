@@ -16,12 +16,14 @@ import com.tubes.fittrack.MapsActivity
 import com.tubes.fittrack.R
 import com.tubes.fittrack.api.DataLocation
 import com.tubes.fittrack.api.RetrofitClient
+import kotlin.random.Random
 
 class LocationAdapter(private val dataLocation: ArrayList<DataLocation>): RecyclerView.Adapter<LocationAdapter.ViewHolder>(){
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         var nameLocation: TextView = itemView.findViewById(R.id.tv_latihan)
         var gambar: ImageView = itemView.findViewById(R.id.gambar)
         var lihat: ConstraintLayout = itemView.findViewById(R.id.btn_lihat)
+        var rating: TextView = itemView.findViewById(R.id.tv_rating)
 
     }
 
@@ -33,10 +35,14 @@ class LocationAdapter(private val dataLocation: ArrayList<DataLocation>): Recycl
     override fun getItemCount(): Int {
         return dataLocation.size
     }
-
+    fun generateRandomRating(): Int {
+        return Random.nextInt(1, 5) // Angka akan berada dalam rentang 1 hingga 5 (inklusif)
+    }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val location = dataLocation[position]
         val imageUrl: String = RetrofitClient.IMAGE_URL + location.foto
+        val randomrate=generateRandomRating()
+        holder.rating.text="( $randomrate )"
         holder.nameLocation.text = location.name
         Glide.with(holder.itemView.context)
             .load(imageUrl)

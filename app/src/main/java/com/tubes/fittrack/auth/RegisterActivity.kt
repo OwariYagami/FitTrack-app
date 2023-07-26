@@ -14,6 +14,7 @@ import com.tubes.fittrack.R
 import com.tubes.fittrack.api.ResponseRegister
 import com.tubes.fittrack.api.RetrofitClient
 import com.tubes.fittrack.databinding.ActivityRegisterBinding
+import com.tubes.fittrack.ui.profile.ShareActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,7 +40,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.btnMasuk.setOnClickListener{
-            val intent = Intent(this@RegisterActivity, MainActivity::class.java)
+            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
             startActivity(intent)
         }
     }
@@ -76,7 +77,13 @@ class RegisterActivity : AppCompatActivity() {
                         SweetAlertDialog(this@RegisterActivity, SweetAlertDialog.SUCCESS_TYPE)
                             .setTitleText("$message")
                             .setContentText("silahkan login")
-                            .show()
+                            .setConfirmText("Baik")
+                            .setConfirmClickListener { sDialog ->
+                                sDialog.dismissWithAnimation()
+                                val intent =
+                                    Intent(this@RegisterActivity, LoginActivity::class.java)
+                                startActivity(intent)
+                            }.show()
                     } else {
                         pDialog.dismiss()
                         SweetAlertDialog(this@RegisterActivity, SweetAlertDialog.ERROR_TYPE)

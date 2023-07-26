@@ -274,7 +274,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:fontFamily="@font/jakartab"
-                        android:text="2500 kal"
+                        android:text="0 kal"
                         android:textColor="@color/orange"
                         android:textSize="@dimen/_25sdp"></TextView>
                 </LinearLayout>

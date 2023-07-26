@@ -77,7 +77,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-
+        android:layout_marginBottom="@dimen/_50sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -90,6 +90,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="@dimen/_16sdp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cl1">
 
@@ -257,7 +258,56 @@
                 app:layout_constraintStart_toEndOf="@id/rl4"
                 app:layout_constraintTop_toTopOf="parent"></TextView>
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clshare"
+            android:padding="@dimen/_5sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/custom_box_profile"
+            app:layout_constraintTop_toBottomOf="@id/cl5"
+            android:layout_marginTop="@dimen/_10sdp">
 
+            <RelativeLayout
+
+                android:id="@+id/rlshare"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/custom_boxic_profile"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_share2"></ImageView>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/jakartab"
+                android:text="Share Progress Hari Ini"
+                android:textColor="@color/text"
+                android:textSize="@dimen/_16sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/rlshare"
+                app:layout_constraintTop_toTopOf="parent"></TextView>
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_right"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintTop_toTopOf="parent"></ImageView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn_help"
             android:padding="@dimen/_5sdp"
@@ -266,7 +316,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:background="@drawable/custom_box_profile2"
-            app:layout_constraintTop_toBottomOf="@id/cl5"
+            app:layout_constraintTop_toBottomOf="@id/clshare"
             android:layout_marginTop="@dimen/_10sdp">
 
             <RelativeLayout
@@ -318,7 +368,8 @@
             app:layout_constraintStart_toStartOf="parent"
             android:background="@drawable/custom_box_profile3"
             app:layout_constraintTop_toBottomOf="@id/btn_help"
-            android:layout_marginTop="@dimen/_10sdp">
+            android:layout_marginTop="@dimen/_10sdp"
+          >
 
             <RelativeLayout
 

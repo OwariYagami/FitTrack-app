@@ -72,6 +72,11 @@ class ProfileFragment : Fragment() {
         binding.btnLogout.setOnClickListener {
             logoutAndNavigateToLogin()
         }
+
+        binding.clshare.setOnClickListener{
+            val intent = Intent(activity, ShareActivity::class.java)
+            startActivity(intent)
+        }
         return root;
     }
 
